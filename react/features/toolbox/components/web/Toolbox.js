@@ -38,6 +38,7 @@ import {
 } from '../../../participants-pane/actions';
 import ParticipantsPaneButton from '../../../participants-pane/components/ParticipantsPaneButton';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollButton } from '../../../poll';
 import { addReactionToBuffer } from '../../../reactions/actions.any';
 import { ReactionsMenuButton } from '../../../reactions/components';
 import { REACTIONS } from '../../../reactions/constants';
@@ -45,7 +46,7 @@ import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
-import {
+import { isScreenAudioShared, isScreenAudioSupported,
     isScreenAudioSupported,
     isScreenVideoShared,
     ShareAudioButton,
@@ -80,6 +81,7 @@ import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
+
 
 import AudioSettingsButton from './AudioSettingsButton';
 import FullscreenButton from './FullscreenButton';
@@ -215,7 +217,7 @@ type Props = {
     /**
      * Whether or not reactions feature is enabled.
      */
-    _reactionsEnabled: boolean,
+    _virtualSource: Object,
 
     /**
      * Invoked to active other features of the app.
@@ -399,15 +401,14 @@ class Toolbox extends Component<Props> {
      * @returns {ReactElement}
      */
     render() {
-        const { _chatOpen, _visible, _toolbarButtons } = this.props;
-        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${
-            _toolbarButtons.length ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
+        const { _chatOpen, _visible, _visibleButtons } = this.props;
+        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${_visibleButtons.length ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
 
         return (
             <div
                 className = { rootClassNames }
                 id = 'new-toolbox'>
-                { this._renderToolboxContent() }
+                {this._renderToolboxContent()}
             </div>
         );
     }
@@ -985,11 +986,11 @@ class Toolbox extends Component<Props> {
      */
     _onShortcutToggleScreenshare() {
         sendAnalytics(createShortcutEvent(
-                'toggle.screen.sharing',
-                ACTION_SHORTCUT_TRIGGERED,
-                {
-                    enable: !this.props._screenSharing
-                }));
+            'toggle.screen.sharing',
+            ACTION_SHORTCUT_TRIGGERED,
+            {
+                enable: !this.props._screenSharing
+            }));
 
         this._doToggleScreenshare();
     }
@@ -1070,9 +1071,9 @@ class Toolbox extends Component<Props> {
     _onToolbarToggleFullScreen() {
         sendAnalytics(createToolbarEvent(
             'toggle.fullscreen',
-                {
-                    enable: !this.props._fullScreen
-                }));
+            {
+                enable: !this.props._fullScreen
+            }));
         this._closeOverflowMenuIfOpen();
         this._doToggleFullScreen();
     }
@@ -1185,11 +1186,8 @@ class Toolbox extends Component<Props> {
                 <div
                     className = 'toolbox-content-wrapper'
                     onFocus = { this._onTabIn }
-                    { ...(_isMobile ? {} : {
-                        onMouseOut: this._onMouseOut,
-                        onMouseOver: this._onMouseOver
-                    }) }>
-                    <DominantSpeakerName />
+                    onMouseOut = { this._onMouseOut }
+                    onMouseOver = { this._onMouseOver }>
                     <div className = 'toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
@@ -1203,7 +1201,7 @@ class Toolbox extends Component<Props> {
                                 key = 'overflow-menu'
                                 onVisibilityChange = { this._onSetOverflowVisible }
                                 showMobileReactions = {
-                                    _reactionsEnabled && overflowMenuButtons.find(({ key }) => key === 'raisehand')
+                                    overflowMenuButtons.find(({ key }) => key === 'raisehand')
                                 }>
                                 <ul
                                     aria-label = { t(toolbarAccLabel) }
@@ -1224,7 +1222,9 @@ class Toolbox extends Component<Props> {
                                             </>
                                         ;
                                     })}
+
                                 </ul>
+                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 
@@ -1241,14 +1241,13 @@ class Toolbox extends Component<Props> {
 
 /**
  * Maps (parts of) the redux state to {@link Toolbox}'s React {@code Component}
- * props.
- *
- * @param {Object} state - The redux store/state.
- * @param {Object} ownProps - The props explicitly passed.
- * @private
- * @returns {{}}
- */
-function _mapStateToProps(state, ownProps) {
+                * props.
+                *
+                * @param {Object} state - The redux store/state.
+                * @private
+                * @returns {{}}
+                */
+function _mapStateToProps(state) {
     const { conference } = state['features/base/conference'];
     let desktopSharingEnabled = JitsiMeetJS.isDesktopSharingEnabled();
     const {
