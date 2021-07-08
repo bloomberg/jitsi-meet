@@ -41,6 +41,12 @@ import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
+
+import { isScreenAudioShared, isScreenAudioSupported } from '../../../screen-share/';
+import SecurityDialogButton from '../../../security/components/security-dialog/SecurityDialogButton';
+
+import { PollButton } from '../../../poll'
+
 import {
     isScreenAudioSupported,
     isScreenVideoShared,
@@ -77,6 +83,7 @@ import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
+
 
 import AudioSettingsButton from './AudioSettingsButton';
 import FullscreenButton from './FullscreenButton';
@@ -210,7 +217,7 @@ type Props = {
     /**
      * Returns the selected virtual source object.
      */
-     _virtualSource: Object,
+    _virtualSource: Object,
 
     /**
      * Invoked to active other features of the app.
@@ -344,7 +351,7 @@ class Toolbox extends Component<Props> {
      * @returns {void}
      */
     componentWillUnmount() {
-        [ 'A', 'C', 'D', 'R', 'S' ].forEach(letter =>
+        ['A', 'C', 'D', 'R', 'S'].forEach(letter =>
             APP.keyboardshortcut.unregisterShortcut(letter));
     }
 
@@ -356,14 +363,13 @@ class Toolbox extends Component<Props> {
      */
     render() {
         const { _chatOpen, _visible, _visibleButtons } = this.props;
-        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${
-            _visibleButtons.length ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
+        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${_visibleButtons.length ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
 
         return (
             <div
-                className = { rootClassNames }
-                id = 'new-toolbox'>
-                { this._renderToolboxContent() }
+                className={rootClassNames}
+                id='new-toolbox'>
+                {this._renderToolboxContent()}
             </div>
         );
     }
@@ -930,11 +936,11 @@ class Toolbox extends Component<Props> {
      */
     _onShortcutToggleScreenshare() {
         sendAnalytics(createShortcutEvent(
-                'toggle.screen.sharing',
-                ACTION_SHORTCUT_TRIGGERED,
-                {
-                    enable: !this.props._screenSharing
-                }));
+            'toggle.screen.sharing',
+            ACTION_SHORTCUT_TRIGGERED,
+            {
+                enable: !this.props._screenSharing
+            }));
 
         this._doToggleScreenshare();
     }
@@ -1015,9 +1021,9 @@ class Toolbox extends Component<Props> {
     _onToolbarToggleFullScreen() {
         sendAnalytics(createToolbarEvent(
             'toggle.fullscreen',
-                {
-                    enable: !this.props._fullScreen
-                }));
+            {
+                enable: !this.props._fullScreen
+            }));
         this._closeOverflowMenuIfOpen();
         this._doToggleFullScreen();
     }
@@ -1108,54 +1114,56 @@ class Toolbox extends Component<Props> {
         const { mainMenuButtons, overflowMenuButtons } = this._getVisibleButtons();
 
         return (
-            <div className = { containerClassName }>
+            <div className={containerClassName}>
                 <div
-                    className = 'toolbox-content-wrapper'
-                    onFocus = { this._onTabIn }
-                    onMouseOut = { this._onMouseOut }
-                    onMouseOver = { this._onMouseOver }>
-                    <div className = 'toolbox-content-items'>
+                    className='toolbox-content-wrapper'
+                    onFocus={this._onTabIn}
+                    onMouseOut={this._onMouseOut}
+                    onMouseOver={this._onMouseOver}>
+                    <div className='toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
-                                { ...rest }
-                                key = { key } />))}
+                                {...rest}
+                                key={key} />))}
 
                         {Boolean(overflowMenuButtons.length) && (
                             <OverflowMenuButton
-                                ariaControls = 'overflow-menu'
-                                isOpen = { _overflowMenuVisible }
-                                key = 'overflow-menu'
-                                onVisibilityChange = { this._onSetOverflowVisible }
-                                showMobileReactions = {
+                                ariaControls='overflow-menu'
+                                isOpen={_overflowMenuVisible}
+                                key='overflow-menu'
+                                onVisibilityChange={this._onSetOverflowVisible}
+                                showMobileReactions={
                                     overflowMenuButtons.find(({ key }) => key === 'raisehand')
                                 }>
                                 <ul
-                                    aria-label = { t(toolbarAccLabel) }
-                                    className = 'overflow-menu'
-                                    id = 'overflow-menu'
-                                    onKeyDown = { this._onEscKey }
-                                    role = 'menu'>
+                                    aria-label={t(toolbarAccLabel)}
+                                    className='overflow-menu'
+                                    id='overflow-menu'
+                                    onKeyDown={this._onEscKey}
+                                    role='menu'>
                                     {overflowMenuButtons.map(({ group, key, Content, ...rest }, index, arr) => {
                                         const showSeparator = index > 0 && arr[index - 1].group !== group;
 
                                         return key !== 'raisehand'
                                             && <>
-                                                {showSeparator && <Separator key = { `hr${group}` } />}
+                                                {showSeparator && <Separator key={`hr${group}`} />}
                                                 <Content
-                                                    { ...rest }
-                                                    key = { key }
-                                                    showLabel = { true } />
+                                                    {...rest}
+                                                    key={key}
+                                                    showLabel={true} />
                                             </>
-                                        ;
+                                            ;
                                     })}
+
                                 </ul>
+                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 
                         <HangupButton
-                            customClass = 'hangup-button'
-                            key = 'hangup-button'
-                            visible = { isToolbarButtonEnabled('hangup', _toolbarButtons) } />
+                            customClass='hangup-button'
+                            key='hangup-button'
+                            visible={isToolbarButtonEnabled('hangup', _toolbarButtons)} />
                     </div>
                 </div>
             </div>
@@ -1165,12 +1173,12 @@ class Toolbox extends Component<Props> {
 
 /**
  * Maps (parts of) the redux state to {@link Toolbox}'s React {@code Component}
- * props.
- *
- * @param {Object} state - The redux store/state.
- * @private
- * @returns {{}}
- */
+                * props.
+                *
+                * @param {Object} state - The redux store/state.
+                * @private
+                * @returns {{}}
+                */
 function _mapStateToProps(state) {
     const { conference } = state['features/base/conference'];
     let desktopSharingEnabled = JitsiMeetJS.isDesktopSharingEnabled();
