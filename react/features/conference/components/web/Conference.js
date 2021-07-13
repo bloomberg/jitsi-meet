@@ -18,6 +18,7 @@ import { KnockingParticipantList, LobbyScreen } from '../../../lobby';
 import { getIsLobbyVisible } from '../../../lobby/functions';
 import { ParticipantsPane } from '../../../participants-pane/components/web';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollsPane } from '../../../poll/components';
 import { Prejoin, isPrejoinPageVisible, isPrejoinPageLoading } from '../../../prejoin';
 import { fullScreenChanged, showToolbox } from '../../../toolbox/actions.web';
 import { Toolbox } from '../../../toolbox/components/web';
@@ -241,7 +242,7 @@ class Conference extends AbstractConference<Props, *> {
                     { _showPrejoin || _showLobby || <Toolbox /> }
                     <Chat />
 
-                    { this.renderNotificationsContainer() }
+                    {this.renderNotificationsContainer()}
 
                     <CalleeInfoContainer />
 
@@ -249,6 +250,7 @@ class Conference extends AbstractConference<Props, *> {
                     { _showLobby && <LobbyScreen />}
                 </div>
                 <ParticipantsPane />
+                <PollsPane />
             </div>
         );
     }

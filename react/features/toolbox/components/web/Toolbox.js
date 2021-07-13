@@ -217,7 +217,7 @@ type Props = {
     /**
      * Whether or not reactions feature is enabled.
      */
-    _virtualSource: Object,
+    _reactionsEnabled: boolean,
 
     /**
      * Invoked to active other features of the app.
@@ -1186,8 +1186,11 @@ class Toolbox extends Component<Props> {
                 <div
                     className = 'toolbox-content-wrapper'
                     onFocus = { this._onTabIn }
-                    onMouseOut = { this._onMouseOut }
-                    onMouseOver = { this._onMouseOver }>
+                    { ...(_isMobile ? {} : {
+                        onMouseOut: this._onMouseOut,
+                        onMouseOver: this._onMouseOver
+                    }) }>
+                    <DominantSpeakerName />
                     <div className = 'toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
@@ -1201,7 +1204,7 @@ class Toolbox extends Component<Props> {
                                 key = 'overflow-menu'
                                 onVisibilityChange = { this._onSetOverflowVisible }
                                 showMobileReactions = {
-                                    overflowMenuButtons.find(({ key }) => key === 'raisehand')
+                                    _reactionsEnabled && overflowMenuButtons.find(({ key }) => key === 'raisehand')
                                 }>
                                 <ul
                                     aria-label = { t(toolbarAccLabel) }
@@ -1224,7 +1227,6 @@ class Toolbox extends Component<Props> {
                                     })}
 
                                 </ul>
-                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 
@@ -1241,13 +1243,14 @@ class Toolbox extends Component<Props> {
 
 /**
  * Maps (parts of) the redux state to {@link Toolbox}'s React {@code Component}
-                * props.
-                *
-                * @param {Object} state - The redux store/state.
-                * @private
-                * @returns {{}}
-                */
-function _mapStateToProps(state) {
+ * props.
+ *
+ * @param {Object} state - The redux store/state.
+ * @param {Object} ownProps - The props explicitly passed.
+ * @private
+ * @returns {{}}
+ */
+function _mapStateToProps(state, ownProps) {
     const { conference } = state['features/base/conference'];
     let desktopSharingEnabled = JitsiMeetJS.isDesktopSharingEnabled();
     const {

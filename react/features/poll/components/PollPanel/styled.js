@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Icon, IconHorizontalPoints } from '../../../base/icons';
-import { ACTION_TRIGGER } from '../../constants';
+import { ActionTrigger } from '../../constants';
 
 export const ignoredChildClassName = 'ignore-child';
 
@@ -21,7 +21,6 @@ export const Button = styled.button`
   display: flex;
   font-weight: unset;
   justify-content: center;
-  min-height: 32px;
 
   &:hover {
     background-color: ${
@@ -29,10 +28,6 @@ export const Button = styled.button`
   props => props.primary ? '#246FE5' : '#525252'
   };
   }
-`;
-
-export const QuickActionButton = styled(Button)`
-  padding: 0 12px;
 `;
 
 export const Container = styled.div`
@@ -98,8 +93,8 @@ export const ContextMenuItem = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
-  min-height: 40px;
-  padding: 10px 16px;
+  height: 40px;
+  padding: 8px 16px;
 
   & > *:not(:last-child) {
     margin-right: 16px;
@@ -229,6 +224,7 @@ export const ParticipantActionsHover = styled(ParticipantActions)`
     position: absolute;
     top: 0;
     transform: translateX(-100%);
+    width: 40px;
   }
 `;
 
@@ -246,25 +242,6 @@ export const ParticipantContent = styled.div`
   padding-right: ${props => props.theme.panePadding}px;
 `;
 
-export const ParticipantStates = styled.div`
-  display: flex;
-  justify-content: flex-end;
-
-  & > * {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-
-  & > *:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .jitsi-icon {
-    padding: 3px;
-  }
-`;
-
 export const ParticipantContainer = styled.div`
   align-items: center;
   color: white;
@@ -275,17 +252,11 @@ export const ParticipantContainer = styled.div`
   padding-left: ${props => props.theme.panePadding}px;
   position: relative;
 
-  &:hover {
-    ${ParticipantStates} {
-      ${props => !props.local && 'display: none'};
-    }
-  }
-
   ${props => !props.isHighlighted && '&:hover {'}
     background-color: #292929;
 
     & ${ParticipantActions} {
-      ${props => props.trigger === ACTION_TRIGGER.HOVER && `
+      ${props => props.trigger === ActionTrigger.Hover && `
         display: flex;
       `}
     }
@@ -319,6 +290,21 @@ export const ParticipantNameContainer = styled.div`
   flex: 1;
   margin-right: 8px;
   overflow: hidden;
+`;
+
+export const ParticipantStates = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  & > * {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  & > *:not(:last-child) {
+    margin-right: 8px;
+  }
 `;
 
 export const RaisedHandIndicatorBackground = styled.div`
