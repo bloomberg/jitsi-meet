@@ -15,6 +15,8 @@ import {
   Header
 } from '../styled';
 import { close } from '../../../actions';
+import { CREATE_NEW_POLL, CREATE_NEW_POLLRESPONSE } from '../../../actionTypes'
+import { new_poll } from '../../../mock_data/mock_poll'
 
 const PollsPane = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,20 @@ const PollsPane = () => {
       closePane();
     }
   }, [closePane]);
-  console.log(paneOpen)
+
+  const conference = useSelector(state => state['features/base/conference'].conference);
+  const sendPollMessage = useCallback(() => {
+    console.log({
+      type: CREATE_NEW_POLL,
+      poll: new_poll
+    })
+    conference.sendMessage({
+      type: CREATE_NEW_POLL,
+      poll: new_poll
+    })
+  });
+
+
   return (
     <ThemeProvider theme={theme}>
 
@@ -49,7 +64,7 @@ const PollsPane = () => {
               tabIndex={0} />
           </Header>
           <Container>
-            <h1>Poll</h1>
+            <button onClick={sendPollMessage}>Poll</button>
           </Container>
 
           <Footer>

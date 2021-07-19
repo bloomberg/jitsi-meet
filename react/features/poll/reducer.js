@@ -2,13 +2,16 @@ import { ReducerRegistry } from '../base/redux';
 
 import {
   POLLS_PANE_CLOSE,
-  POLLS_PANE_OPEN
+  POLLS_PANE_OPEN,
+  CREATE_NEW_POLL
 } from './actionTypes';
 
 import { REDUCER_KEY } from './constants';
 
 const DEFAULT_STATE = {
-  isOpen: false
+  isOpen: false,
+  polls: [],
+  pollResponses: []
 };
 
 
@@ -27,6 +30,20 @@ ReducerRegistry.register(
         return {
           ...state,
           isOpen: true
+        };
+
+      case CREATE_NEW_POLL:
+        console.log(CREATE_NEW_POLL)
+        return {
+          ...state,
+          polls: [...polls, action.poll]
+        };
+
+      case CREATE_NEW_POLLRESPONSE:
+        console.log(CREATE_NEW_POLLRESPONSE)
+        return {
+          ...state,
+          pollResponses: [...pollResponses, action.response]
         };
 
       default:
