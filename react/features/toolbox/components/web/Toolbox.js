@@ -46,7 +46,14 @@ import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
+<<<<<<< HEAD
 import { isScreenAudioShared, isScreenAudioSupported,
+=======
+
+import { PollButton } from '../../../poll'
+
+import {
+>>>>>>> adapt to latest jitsi-meet changes
     isScreenAudioSupported,
     isScreenVideoShared,
     ShareAudioButton,
@@ -679,6 +686,21 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
+<<<<<<< HEAD
+=======
+        const livestreaming = {
+            key: 'livestreaming',
+            Content: LiveStreamButton,
+            group: 2
+        };
+
+        const poll = {
+            key: 'poll',
+            Content: PollButton,
+            group: 2
+        };
+
+>>>>>>> adapt to latest jitsi-meet changes
         const shareVideo = {
             key: 'sharedvideo',
             Content: SharedVideoButton,
@@ -745,6 +767,8 @@ class Toolbox extends Component<Props> {
             group: 4
         };
 
+
+
         return {
             microphone,
             camera,
@@ -765,6 +789,11 @@ class Toolbox extends Component<Props> {
             livestreaming,
             muteEveryone,
             muteVideoEveryone,
+<<<<<<< HEAD
+=======
+            livestreaming,
+            poll,
+>>>>>>> adapt to latest jitsi-meet changes
             shareVideo,
             shareAudio,
             etherpad,
@@ -776,6 +805,7 @@ class Toolbox extends Component<Props> {
             feedback,
             download,
             help
+
         };
     }
 
@@ -790,7 +820,6 @@ class Toolbox extends Component<Props> {
             _clientWidth,
             _toolbarButtons
         } = this.props;
-
 
         const buttons = this._getAllButtons();
         const isHangupVisible = isToolbarButtonEnabled('hangup', _toolbarButtons);
@@ -814,7 +843,6 @@ class Toolbox extends Component<Props> {
         if (sliceIndex < filtered.length) {
             sliceIndex -= 1;
         }
-
         return {
             mainMenuButtons: filtered.slice(0, sliceIndex),
             overflowMenuButtons: filtered.slice(sliceIndex)
