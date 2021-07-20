@@ -2,8 +2,7 @@ import { Dispatch } from 'redux';
 import { translate } from '../../../../base/i18n';
 import { connect } from '../../../../base/redux';
 import { AbstractButton } from '../../../../base/toolbox/components';
-import { IconSecurityOff, IconSecurityOn } from '../../../../base/icons';
-import { getPollsPaneOpen } from '../../../functions';
+import { PollIcon } from '../../../../base/icons';
 import {
   close as closePollsPane,
   open as openPollsPane
@@ -18,8 +17,8 @@ type Props = AbstractButtonProps & {
 
 
 class PollButton extends AbstractButton<Props, *> {
-  icon = IconSecurityOff;
-  label = 'Poll';
+  icon = PollIcon;
+  label = 'Polls';
 
   _handleClick() {
     let paneOpen = this.props.isOpen

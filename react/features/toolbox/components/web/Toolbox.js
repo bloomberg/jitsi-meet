@@ -42,9 +42,6 @@ import {
     RecordButton
 } from '../../../recording';
 
-import { isScreenAudioShared, isScreenAudioSupported } from '../../../screen-share/';
-import SecurityDialogButton from '../../../security/components/security-dialog/SecurityDialogButton';
-
 import { PollButton } from '../../../poll'
 
 import {
@@ -631,6 +628,12 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
+        const poll = {
+            key: 'poll',
+            Content: PollButton,
+            group: 2
+        };
+
         const shareVideo = {
             key: 'sharedvideo',
             Content: SharedVideoButton,
@@ -697,6 +700,8 @@ class Toolbox extends Component<Props> {
             group: 4
         };
 
+
+
         return {
             microphone,
             camera,
@@ -716,6 +721,7 @@ class Toolbox extends Component<Props> {
             muteEveryone,
             muteVideoEveryone,
             livestreaming,
+            poll,
             shareVideo,
             shareAudio,
             etherpad,
@@ -727,6 +733,7 @@ class Toolbox extends Component<Props> {
             feedback,
             download,
             help
+
         };
     }
 
@@ -741,7 +748,6 @@ class Toolbox extends Component<Props> {
             _clientWidth,
             _toolbarButtons
         } = this.props;
-
 
         const buttons = this._getAllButtons();
         const isHangupVisible = isToolbarButtonEnabled('hangup', _toolbarButtons);
@@ -764,7 +770,6 @@ class Toolbox extends Component<Props> {
         if (sliceIndex < filtered.length) {
             sliceIndex -= 1;
         }
-
         return {
             mainMenuButtons: filtered.slice(0, sliceIndex),
             overflowMenuButtons: filtered.slice(sliceIndex)
@@ -1156,7 +1161,6 @@ class Toolbox extends Component<Props> {
                                     })}
 
                                 </ul>
-                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 

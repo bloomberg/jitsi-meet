@@ -3,7 +3,8 @@ import { ReducerRegistry } from '../base/redux';
 import {
   POLLS_PANE_CLOSE,
   POLLS_PANE_OPEN,
-  CREATE_NEW_POLL
+  CREATE_NEW_POLL,
+  CREATE_NEW_POLLRESPONSE
 } from './actionTypes';
 
 import { REDUCER_KEY } from './constants';

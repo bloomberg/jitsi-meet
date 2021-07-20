@@ -58,50 +58,50 @@ const INITIAL_RN_STATE = {
 
 ReducerRegistry.register('features/base/config', (state = _getInitialState(), action) => {
     switch (action.type) {
-    case UPDATE_CONFIG:
-        return _updateConfig(state, action);
+        case UPDATE_CONFIG:
+            return _updateConfig(state, action);
 
-    case CONFIG_WILL_LOAD:
-        return {
-            error: undefined,
-
-            /**
-                * The URL of the location associated with/configured by this
-                * configuration.
-                *
-                * @type URL
-                */
-            locationURL: action.locationURL
-        };
-
-    case LOAD_CONFIG_ERROR:
-        // XXX LOAD_CONFIG_ERROR is one of the settlement execution paths of
-        // the asynchronous "loadConfig procedure/process" started with
-        // CONFIG_WILL_LOAD. Due to the asynchronous nature of it, whoever
-        // is settling the process needs to provide proof that they have
-        // started it and that the iteration of the process being completed
-        // now is still of interest to the app.
-        if (state.locationURL === action.locationURL) {
+        case CONFIG_WILL_LOAD:
             return {
+                error: undefined,
+
                 /**
-                    * The {@link Error} which prevented the loading of the
-                    * configuration of the associated {@code locationURL}.
+                    * The URL of the location associated with/configured by this
+                    * configuration.
                     *
-                    * @type Error
+                    * @type URL
                     */
-                error: action.error
+                locationURL: action.locationURL
             };
-        }
-        break;
 
-    case SET_CONFIG:
-        return _setConfig(state, action);
+        case LOAD_CONFIG_ERROR:
+            // XXX LOAD_CONFIG_ERROR is one of the settlement execution paths of
+            // the asynchronous "loadConfig procedure/process" started with
+            // CONFIG_WILL_LOAD. Due to the asynchronous nature of it, whoever
+            // is settling the process needs to provide proof that they have
+            // started it and that the iteration of the process being completed
+            // now is still of interest to the app.
+            if (state.locationURL === action.locationURL) {
+                return {
+                    /**
+                        * The {@link Error} which prevented the loading of the
+                        * configuration of the associated {@code locationURL}.
+                        *
+                        * @type Error
+                        */
+                    error: action.error
+                };
+            }
+            break;
 
-    case OVERWRITE_CONFIG:
-        return {
-            ...state,
-            ...action.config
-        };
+        case SET_CONFIG:
+            return _setConfig(state, action);
+
+        case OVERWRITE_CONFIG:
+            return {
+                ...state,
+                ...action.config
+            };
     }
 
     return state;
@@ -188,9 +188,8 @@ function _setConfig(state, { config }) {
  */
 function _translateLegacyConfig(oldValue: Object) {
     const newValue = oldValue;
-
     if (!Array.isArray(oldValue.toolbarButtons)
-            && typeof interfaceConfig === 'object' && Array.isArray(interfaceConfig.TOOLBAR_BUTTONS)) {
+        && typeof interfaceConfig === 'object' && Array.isArray(interfaceConfig.TOOLBAR_BUTTONS)) {
         newValue.toolbarButtons = interfaceConfig.TOOLBAR_BUTTONS;
     }
 
