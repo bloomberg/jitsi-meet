@@ -8,7 +8,7 @@ export const POLLS_PANE_CLOSE = 'POLLS_PANE_CLOSE';
  */
 export const POLLS_PANE_OPEN = 'POLLS_PANE_OPEN';
 
-export const CREATE_NEW_POLL = 'CREATE_NEW_POLL';
+export const NEW_POLL = 'NEW_POLL';
 
-export const CREATE_NEW_POLLRESPONSE = 'CREATE_NEW_POLLRESPONSE';
+export const NEW_POLL_RESPONSE = 'NEW_POLL_RESPONSE';
 

@@ -1,5 +1,4 @@
-import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, CREATE_NEW_POLL, CREATE_NEW_POLLRESPONSE } from './actionTypes'
-import { PollResponse, Poll } from './models';
+import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE } from './actionTypes';
 
 /**
  * Action to close the participants pane.
@@ -11,6 +10,7 @@ export const close = () => {
     type: POLLS_PANE_CLOSE
   };
 };
+
 /**
 * Action to open the participants pane.
 *
@@ -22,16 +22,16 @@ export const open = () => {
   };
 };
 
-export const receive_new_poll = (poll) => {
+export const newPoll = (poll) => {
   return {
-    type: CREATE_NEW_POLL,
+    type: NEW_POLL,
     poll
   };
 };
 
-export const receive_new_pollResponse = (response) => {
+export const newPollResponse = (response) => {
   return {
-    type: RECEIVE_NEW_POLLRESPONSE,
+    type: NEW_POLL_RESPONSE,
     response
   };
 };

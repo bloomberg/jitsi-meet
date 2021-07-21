@@ -16,8 +16,8 @@ import { CalleeInfoContainer } from '../../../invite';
 import { LargeVideo } from '../../../large-video';
 import { KnockingParticipantList, LobbyScreen } from '../../../lobby';
 import { ParticipantsPane } from '../../../participants-pane/components';
-import { PollsPane } from '../../../poll/components';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollsPane } from '../../../poll/components';
 import { Prejoin, isPrejoinPageVisible } from '../../../prejoin';
 import { fullScreenChanged, showToolbox } from '../../../toolbox/actions.web';
 import { Toolbox } from '../../../toolbox/components/web';
@@ -231,10 +231,10 @@ class Conference extends AbstractConference<Props, *> {
                     <div id='videospace'>
                         <LargeVideo />
                         {!_isParticipantsPaneVisible
-                         && <div id = 'notification-participant-list'>
-                             <KnockingParticipantList />
-                             <AudioModerationNotifications />
-                         </div>}
+                            && <div id='notification-participant-list'>
+                                <KnockingParticipantList />
+                                <AudioModerationNotifications />
+                            </div>}
                         <Filmstrip />
                     </div>
 

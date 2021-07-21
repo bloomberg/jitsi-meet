@@ -1,6 +1,7 @@
 import { getCurrentConference } from '../base/conference';
 import { StateListenerRegistry } from '../base/redux';
-import { CREATE_NEW_POLL, CREATE_NEW_POLLRESPONSE } from './actionTypes'
+import { NEW_POLL, NEW_POLL_RESPONSE } from './actionTypes';
+import { newPoll, newPollResponse } from './actions';
 
 
 
@@ -9,12 +10,14 @@ StateListenerRegistry.register(
   (conference, store, previousConference) => {
     if (conference && conference !== previousConference) {
       conference.room.addListener('xmmp.json_message_received', (senderJid, data) => {
-        if (data.type === CREATE_NEW_POLL) {
+        if (data.type === NEW_POLL) {
           console.log("New poll received")
-          console.log(data)
+          store.dispatch(newPoll(data.poll));
         }
-        if (data.type === CREATE_NEW_POLL) {
+        else if (data.type === NEW_POLL_RESPONSE) {
           console.log("New Poll response received")
+          store.dispatch(newPollResponse(data.response));
+          console.log(store.getState())
         }
       })
     }
