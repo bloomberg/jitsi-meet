@@ -15,8 +15,9 @@ import {
   Header
 } from '../styled';
 import { close } from '../../../actions';
-import { CREATE_NEW_POLL, CREATE_NEW_POLLRESPONSE } from '../../../actionTypes'
+import { NEW_POLL, NEW_POLL_RESPONSE } from '../../../actionTypes'
 import { new_poll } from '../../../mock_data/mock_poll'
+import { new_response } from '../../../mock_data/mock_pollResponse'
 
 const PollsPane = () => {
   const dispatch = useDispatch();
@@ -34,14 +35,20 @@ const PollsPane = () => {
 
   const conference = useSelector(state => state['features/base/conference'].conference);
   const sendPollMessage = useCallback(() => {
-    console.log({
-      type: CREATE_NEW_POLL,
-      poll: new_poll
-    })
     conference.sendMessage({
-      type: CREATE_NEW_POLL,
+      type: NEW_POLL,
       poll: new_poll
     })
+  });
+
+  const sendPollResponseMessage = useCallback(() => {
+    const msg = {
+      type: NEW_POLL_RESPONSE,
+      response: new_response
+    }
+    console.log(msg)
+    conference.sendMessage(msg)
+
   });
 
 
@@ -64,7 +71,8 @@ const PollsPane = () => {
               tabIndex={0} />
           </Header>
           <Container>
-            <button onClick={sendPollMessage}>Poll</button>
+            <button onClick={sendPollMessage}>New Poll</button>
+            <button onClick={sendPollResponseMessage}>New Poll Response</button>
           </Container>
 
           <Footer>

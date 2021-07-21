@@ -48,6 +48,6 @@ import '../transcribing/middleware';
 import '../video-layout/middleware';
 import '../video-quality/middleware';
 import '../videosipgw/middleware';
-import '../poll/subscriber'
+import '../poll/subscriber';
 
 import './middleware';

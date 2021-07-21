@@ -232,10 +232,10 @@ class Conference extends AbstractConference<Props, *> {
                     <div id = 'videospace'>
                         <LargeVideo />
                         {!_isParticipantsPaneVisible
-                         && <div id = 'notification-participant-list'>
-                             <KnockingParticipantList />
-                             <AudioModerationNotifications />
-                         </div>}
+                            && <div id = 'notification-participant-list'>
+                                <KnockingParticipantList />
+                                <AudioModerationNotifications />
+                            </div>}
                         <Filmstrip />
                     </div>
 
