@@ -1,5 +1,4 @@
 import { ReducerRegistry } from '../base/redux';
-import { newPollResponse } from './actions';
 
 import {
   POLLS_PANE_CLOSE,
