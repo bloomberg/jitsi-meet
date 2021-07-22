@@ -34,10 +34,15 @@ const PollsPane = () => {
   }, [closePane]);
 
   const conference = useSelector(state => state['features/base/conference'].conference);
+
+  const participant = useSelector(state => {
+    return state['features/base/participants'].local
+  });
+
   const sendPollMessage = useCallback(() => {
     conference.sendMessage({
       type: NEW_POLL,
-      poll: new_poll
+      poll: { ...new_poll, creatorParticipantId: participant.id }
     })
   });
 

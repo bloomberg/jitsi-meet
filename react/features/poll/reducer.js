@@ -1,4 +1,5 @@
 import { ReducerRegistry } from '../base/redux';
+import { newPollResponse } from './actions';
 
 import {
   POLLS_PANE_CLOSE,
@@ -11,13 +12,14 @@ import { REDUCER_KEY } from './constants';
 
 const DEFAULT_STATE = {
   isOpen: false,
-  polls: [],
-  pollResponses: []
+  polls: {},
+  pollResponses: {}
 };
 
 
 ReducerRegistry.register(
   REDUCER_KEY, (state = DEFAULT_STATE, action) => {
+    let pollId;
     switch (action.type) {
       case POLLS_PANE_CLOSE:
         return {
@@ -32,15 +34,25 @@ ReducerRegistry.register(
         };
 
       case NEW_POLL:
-        return {
-          ...state,
-          polls: [...state.polls, action.poll]
-        };
+        pollId = action.poll.pollId;
+        let newState = { ...state };
+        state['polls'][pollId] = action.poll;
+        return newState;
 
       case NEW_POLL_RESPONSE:
+        pollId = action.response.pollId;
+        const participantId = action.response.participantId;
+        let newPollResponse = { ...action.response };
+        if (pollId in state.pollResponses) {
+          newPollResponse.pollId[participantId] = action.response;
+        }
+        else {
+          newPollResponse[pollId] = {};
+          newPollResponse[pollId][participantId] = action.response;
+        }
         return {
           ...state,
-          pollResponses: [...state.pollResponses, action.response]
+          pollResponses: newPollResponse
         };
 
       default:
