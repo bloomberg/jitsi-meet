@@ -10,14 +10,14 @@ StateListenerRegistry.register(
   (conference, store, previousConference) => {
     if (conference && conference !== previousConference) {
       conference.room.addListener('xmmp.json_message_received', (senderJid, data) => {
+        console.log(senderJid)
         if (data.type === NEW_POLL) {
-          console.log("New poll received")
           store.dispatch(newPoll(data.poll));
+          console.log(store.getState());
         }
         else if (data.type === NEW_POLL_RESPONSE) {
-          console.log("New Poll response received")
           store.dispatch(newPollResponse(data.response));
-          console.log(store.getState())
+          console.log(store.getState());
         }
       })
     }
