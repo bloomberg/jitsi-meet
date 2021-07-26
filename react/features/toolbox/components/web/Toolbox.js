@@ -39,7 +39,10 @@ import {
 import ParticipantsPaneButton from '../../../participants-pane/components/ParticipantsPaneButton';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
 import { PollButton } from '../../../poll';
+<<<<<<< HEAD
 import { addReactionToBuffer } from '../../../reactions/actions.any';
+=======
+>>>>>>> fixing some styling issues
 import { ReactionsMenuButton } from '../../../reactions/components';
 import { REACTIONS } from '../../../reactions/constants';
 import {
@@ -47,11 +50,14 @@ import {
     RecordButton
 } from '../../../recording';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { isScreenAudioShared, isScreenAudioSupported,
 =======
 
 import { PollButton } from '../../../poll'
 
+=======
+>>>>>>> fixing some styling issues
 import {
 >>>>>>> adapt to latest jitsi-meet changes
     isScreenAudioSupported,
@@ -768,7 +774,6 @@ class Toolbox extends Component<Props> {
         };
 
 
-
         return {
             microphone,
             camera,
@@ -843,6 +848,7 @@ class Toolbox extends Component<Props> {
         if (sliceIndex < filtered.length) {
             sliceIndex -= 1;
         }
+
         return {
             mainMenuButtons: filtered.slice(0, sliceIndex),
             overflowMenuButtons: filtered.slice(sliceIndex)
@@ -1214,11 +1220,16 @@ class Toolbox extends Component<Props> {
                 <div
                     className = 'toolbox-content-wrapper'
                     onFocus = { this._onTabIn }
+<<<<<<< HEAD
                     { ...(_isMobile ? {} : {
                         onMouseOut: this._onMouseOut,
                         onMouseOver: this._onMouseOver
                     }) }>
                     <DominantSpeakerName />
+=======
+                    onMouseOut = { this._onMouseOut }
+                    onMouseOver = { this._onMouseOver }>
+>>>>>>> fixing some styling issues
                     <div className = 'toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
@@ -1232,7 +1243,11 @@ class Toolbox extends Component<Props> {
                                 key = 'overflow-menu'
                                 onVisibilityChange = { this._onSetOverflowVisible }
                                 showMobileReactions = {
+<<<<<<< HEAD
                                     _reactionsEnabled && overflowMenuButtons.find(({ key }) => key === 'raisehand')
+=======
+                                    overflowMenuButtons.find(({ key }) => key === 'raisehand')
+>>>>>>> fixing some styling issues
                                 }>
                                 <ul
                                     aria-label = { t(toolbarAccLabel) }

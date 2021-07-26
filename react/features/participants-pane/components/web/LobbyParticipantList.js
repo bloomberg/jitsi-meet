@@ -47,10 +47,14 @@ export const LobbyParticipantList = () => {
     }
 
     return (
-    <>
-        <div className = { classes.headingContainer }>
-            <div className = { classes.heading }>
-                {t('participantsPane.headings.lobby', { count: participants.length })}
+        <>
+            <div className = { classes.headingContainer }>
+                <div className = { classes.heading }>
+                    {t('participantsPane.headings.lobby', { count: participants.length })}
+                </div>
+                <div
+                    className = { classes.link }
+                    onClick = { admitAll }>{t('lobby.admitAll')}</div>
             </div>
             {
                 participants.length > 1 && (

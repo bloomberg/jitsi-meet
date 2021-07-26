@@ -1,24 +1,25 @@
 import { ReducerRegistry } from '../base/redux';
 
 import {
-    SET_DETAILS
+    SET_ENDPOINT_COUNTED
 } from './actionTypes';
-import { STATUSES } from './constants';
 
 const DEFAULT_STATE = {
-    disabledFeatures: [],
-    status: STATUSES.ACTIVE
+    endpointCounted: false
 };
 
 /**
  * Listen for actions that mutate the billing-counter state
  */
 ReducerRegistry.register(
-    'features/jaas', (state = DEFAULT_STATE, action) => {
+    'features/billing-counter', (state = DEFAULT_STATE, action) => {
         switch (action.type) {
 
-        case SET_DETAILS: {
-            return action.payload;
+        case SET_ENDPOINT_COUNTED: {
+            return {
+                ...state,
+                endpointCounted: true
+            };
         }
 
         default:
