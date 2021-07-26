@@ -216,22 +216,22 @@ class Conference extends AbstractConference<Props, *> {
 
         return (
             <div
-                id='layout_wrapper'
-                onMouseEnter={this._onMouseEnter}
-                onMouseLeave={this._onMouseLeave}
-                onMouseMove={this._onMouseMove} >
+                id = 'layout_wrapper'
+                onMouseEnter = { this._onMouseEnter }
+                onMouseLeave = { this._onMouseLeave }
+                onMouseMove = { this._onMouseMove } >
                 <div
-                    className={_layoutClassName}
-                    id='videoconference_page'
-                    onMouseMove={this._onShowToolbar}
-                    ref={this._setBackground}>
+                    className = { _layoutClassName }
+                    id = 'videoconference_page'
+                    onMouseMove = { this._onShowToolbar }
+                    ref = { this._setBackground }>
                     <ConferenceInfo />
 
                     <Notice />
-                    <div id='videospace'>
+                    <div id = 'videospace'>
                         <LargeVideo />
                         {!_isParticipantsPaneVisible
-                            && <div id='notification-participant-list'>
+                            && <div id = 'notification-participant-list'>
                                 <KnockingParticipantList />
                                 <AudioModerationNotifications />
                             </div>}

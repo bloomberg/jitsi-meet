@@ -13,9 +13,9 @@ export const AntiCollapse = styled.br`
 export const Button = styled.button`
   align-items: center;
   background-color: ${
-  // eslint-disable-next-line no-confusing-arrow
-  props => props.primary ? '#0056E0' : '#3D3D3D'
-  };
+    // eslint-disable-next-line no-confusing-arrow
+    props => props.primary ? '#0056E0' : '#3D3D3D'
+};
   border: 0;
   border-radius: 6px;
   display: flex;
@@ -25,9 +25,9 @@ export const Button = styled.button`
 
   &:hover {
     background-color: ${
-  // eslint-disable-next-line no-confusing-arrow
-  props => props.primary ? '#246FE5' : '#525252'
-  };
+    // eslint-disable-next-line no-confusing-arrow
+    props => props.primary ? '#246FE5' : '#525252'
+};
   }
 `;
 
@@ -52,9 +52,9 @@ export const Container = styled.div`
 `;
 
 export const ContextMenu = styled.div.attrs(props => {
-  return {
-    className: props.className
-  };
+    return {
+        className: props.className
+    };
 })`
   background-color: #292929;
   border-radius: 3px;
@@ -63,13 +63,13 @@ export const ContextMenu = styled.div.attrs(props => {
   font-size: ${props => props.theme.contextFontSize}px;
   font-weight: ${props => props.theme.contextFontWeight};
   margin-top: ${props => {
-    const {
-      participantActionButtonHeight,
-      participantItemHeight
-    } = props.theme;
+        const {
+            participantActionButtonHeight,
+            participantItemHeight
+        } = props.theme;
 
-    return ((3 * participantItemHeight) + participantActionButtonHeight) / 4;
-  }}px;
+        return ((3 * participantItemHeight) + participantActionButtonHeight) / 4;
+    }}px;
   position: absolute;
   right: ${props => props.theme.panePadding}px;
   top: 0;
@@ -86,7 +86,7 @@ export const ContextMenu = styled.div.attrs(props => {
 `;
 
 export const ContextMenuIcon = styled(Icon).attrs({
-  size: 20
+    size: 20
 })`
   & > svg {
     fill: #a4b8d1;
@@ -165,7 +165,7 @@ export const FooterButton = styled(Button)`
 `;
 
 export const FooterEllipsisButton = styled(FooterButton).attrs({
-  children: <Icon src={IconHorizontalPoints} />
+    children: <Icon src = { IconHorizontalPoints } />
 })`
   padding: 8px;
 `;
@@ -202,8 +202,8 @@ export const ParticipantActionButton = styled(Button)`
 `;
 
 export const ParticipantActionEllipsis = styled(ParticipantActionButton).attrs({
-  children: <Icon src={IconHorizontalPoints} />,
-  primary: true
+    children: <Icon src = { IconHorizontalPoints } />,
+    primary: true
 })`
   padding: 6px;
 `;
@@ -279,7 +279,7 @@ export const ParticipantContainer = styled.div`
 `;
 
 export const ParticipantInviteButton = styled(Button).attrs({
-  primary: true
+    primary: true
 })`
   font-size: 15px;
   height: 40px;
@@ -326,7 +326,7 @@ export const RaisedHandIndicatorBackground = styled.div`
 `;
 
 export const VolumeInput = styled.input.attrs({
-  type: 'range'
+    type: 'range'
 })`
   width: 100%;
 `;

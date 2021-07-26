@@ -138,18 +138,18 @@ export function MeetingParticipantList() {
     });
 
     return (
-    <>
-        <Heading>{t('participantsPane.headings.participantsList', { count: participantsCount })}</Heading>
-        {showInviteButton && <InviteButton />}
-        <div>
-            { items }
-        </div>
-        <MeetingParticipantContextMenu
-            muteAudio = { muteAudio }
-            onEnter = { menuEnter }
-            onLeave = { menuLeave }
-            onSelect = { lowerMenu }
-            { ...raiseContext } />
-    </>
+        <>
+            <Heading>{t('participantsPane.headings.participantsList', { count: participantsCount })}</Heading>
+            {showInviteButton && <InviteButton />}
+            <div>
+                { items }
+            </div>
+            <MeetingParticipantContextMenu
+                muteAudio = { muteAudio }
+                onEnter = { menuEnter }
+                onLeave = { menuLeave }
+                onSelect = { lowerMenu }
+                { ...raiseContext } />
+        </>
     );
 }

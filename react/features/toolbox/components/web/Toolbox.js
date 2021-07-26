@@ -36,14 +36,12 @@ import {
 } from '../../../participants-pane/actions';
 import ParticipantsPaneButton from '../../../participants-pane/components/ParticipantsPaneButton';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollButton } from '../../../poll';
 import { ReactionsMenuButton } from '../../../reactions/components';
 import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
-
-import { PollButton } from '../../../poll'
-
 import {
     isScreenAudioSupported,
     isScreenVideoShared,
@@ -348,7 +346,7 @@ class Toolbox extends Component<Props> {
      * @returns {void}
      */
     componentWillUnmount() {
-        ['A', 'C', 'D', 'R', 'S'].forEach(letter =>
+        [ 'A', 'C', 'D', 'R', 'S' ].forEach(letter =>
             APP.keyboardshortcut.unregisterShortcut(letter));
     }
 
@@ -364,8 +362,8 @@ class Toolbox extends Component<Props> {
 
         return (
             <div
-                className={rootClassNames}
-                id='new-toolbox'>
+                className = { rootClassNames }
+                id = 'new-toolbox'>
                 {this._renderToolboxContent()}
             </div>
         );
@@ -701,7 +699,6 @@ class Toolbox extends Component<Props> {
         };
 
 
-
         return {
             microphone,
             camera,
@@ -770,6 +767,7 @@ class Toolbox extends Component<Props> {
         if (sliceIndex < filtered.length) {
             sliceIndex -= 1;
         }
+
         return {
             mainMenuButtons: filtered.slice(0, sliceIndex),
             overflowMenuButtons: filtered.slice(sliceIndex)
@@ -1119,45 +1117,45 @@ class Toolbox extends Component<Props> {
         const { mainMenuButtons, overflowMenuButtons } = this._getVisibleButtons();
 
         return (
-            <div className={containerClassName}>
+            <div className = { containerClassName }>
                 <div
-                    className='toolbox-content-wrapper'
-                    onFocus={this._onTabIn}
-                    onMouseOut={this._onMouseOut}
-                    onMouseOver={this._onMouseOver}>
-                    <div className='toolbox-content-items'>
+                    className = 'toolbox-content-wrapper'
+                    onFocus = { this._onTabIn }
+                    onMouseOut = { this._onMouseOut }
+                    onMouseOver = { this._onMouseOver }>
+                    <div className = 'toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
-                                {...rest}
-                                key={key} />))}
+                                { ...rest }
+                                key = { key } />))}
 
                         {Boolean(overflowMenuButtons.length) && (
                             <OverflowMenuButton
-                                ariaControls='overflow-menu'
-                                isOpen={_overflowMenuVisible}
-                                key='overflow-menu'
-                                onVisibilityChange={this._onSetOverflowVisible}
-                                showMobileReactions={
+                                ariaControls = 'overflow-menu'
+                                isOpen = { _overflowMenuVisible }
+                                key = 'overflow-menu'
+                                onVisibilityChange = { this._onSetOverflowVisible }
+                                showMobileReactions = {
                                     overflowMenuButtons.find(({ key }) => key === 'raisehand')
                                 }>
                                 <ul
-                                    aria-label={t(toolbarAccLabel)}
-                                    className='overflow-menu'
-                                    id='overflow-menu'
-                                    onKeyDown={this._onEscKey}
-                                    role='menu'>
+                                    aria-label = { t(toolbarAccLabel) }
+                                    className = 'overflow-menu'
+                                    id = 'overflow-menu'
+                                    onKeyDown = { this._onEscKey }
+                                    role = 'menu'>
                                     {overflowMenuButtons.map(({ group, key, Content, ...rest }, index, arr) => {
                                         const showSeparator = index > 0 && arr[index - 1].group !== group;
 
                                         return key !== 'raisehand'
                                             && <>
-                                                {showSeparator && <Separator key={`hr${group}`} />}
+                                                {showSeparator && <Separator key = { `hr${group}` } />}
                                                 <Content
-                                                    {...rest}
-                                                    key={key}
-                                                    showLabel={true} />
+                                                    { ...rest }
+                                                    key = { key }
+                                                    showLabel = { true } />
                                             </>
-                                            ;
+                                        ;
                                     })}
 
                                 </ul>
@@ -1165,9 +1163,9 @@ class Toolbox extends Component<Props> {
                         )}
 
                         <HangupButton
-                            customClass='hangup-button'
-                            key='hangup-button'
-                            visible={isToolbarButtonEnabled('hangup', _toolbarButtons)} />
+                            customClass = 'hangup-button'
+                            key = 'hangup-button'
+                            visible = { isToolbarButtonEnabled('hangup', _toolbarButtons) } />
                     </div>
                 </div>
             </div>

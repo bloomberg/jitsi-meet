@@ -6,9 +6,9 @@ import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE } from '
  * @returns {Object}
  */
 export const close = () => {
-  return {
-    type: POLLS_PANE_CLOSE
-  };
+    return {
+        type: POLLS_PANE_CLOSE
+    };
 };
 
 /**
@@ -17,21 +17,21 @@ export const close = () => {
 * @returns {Object}
 */
 export const open = () => {
-  return {
-    type: POLLS_PANE_OPEN
-  };
+    return {
+        type: POLLS_PANE_OPEN
+    };
 };
 
-export const newPoll = (poll) => {
-  return {
-    type: NEW_POLL,
-    poll
-  };
+export const newPoll = poll => {
+    return {
+        type: NEW_POLL,
+        poll
+    };
 };
 
-export const newPollResponse = (response) => {
-  return {
-    type: NEW_POLL_RESPONSE,
-    response
-  };
+export const newPollResponse = response => {
+    return {
+        type: NEW_POLL_RESPONSE,
+        response
+    };
 };
