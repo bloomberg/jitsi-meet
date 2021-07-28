@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { openPollDetailPage } from '../../../actions';
 import {
@@ -24,8 +24,9 @@ export const PollsListItem = ({ poll: p }: Props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const toggleDetailView = p => {
-        dispatch(openPollDetailPage(), [ dispatch ]);
+        dispatch(openPollDetailPage(p), [ dispatch ]);
     };
+    const test = useSelector(state => console.log(state));
 
     return (<ParticipantContainer>
         <ParticipantContent onClick = { () => toggleDetailView(p) }>
@@ -34,11 +35,6 @@ export const PollsListItem = ({ poll: p }: Props) => {
                     { t(p.title) }
                 </ParticipantName>
             </ParticipantNameContainer>
-            {/* <ParticipantStates>
-                { raisedHand && <RaisedHandIndicator /> }
-                { VideoStateIcons[videoMuteState] }
-                { AudioStateIcons[audioMediaState] }
-            </ParticipantStates> */}
         </ParticipantContent>
     </ParticipantContainer>);
 };

@@ -36,15 +36,14 @@ export const newPollResponse = response => {
     };
 };
 
-export const openPollCreationPage = response => {
+export const openPollCreationPage = () => {
     return {
-        type: OPEN_POLL_CREATION_PAGE,
-        response
+        type: OPEN_POLL_CREATION_PAGE
     };
 };
-export const openPollDetailPage = response => {
+export const openPollDetailPage = poll => {
     return {
         type: OPEN_POLL_DETAIL_PAGE,
-        response
+        poll
     };
 };
