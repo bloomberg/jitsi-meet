@@ -4,14 +4,19 @@ import {
     POLLS_PANE_CLOSE,
     POLLS_PANE_OPEN,
     NEW_POLL,
-    NEW_POLL_RESPONSE
+    NEW_POLL_RESPONSE,
+    OPEN_POLL_CREATION_PAGE,
+    OPEN_POLL_DETAIL_PAGE
 } from './actionTypes';
 import { REDUCER_KEY } from './constants';
+import { poll_with_answers, new_poll2 } from './mock_data/mock_poll';
 
 const DEFAULT_STATE = {
     isOpen: false,
-    polls: {},
-    pollResponses: {}
+    polls: { 123: poll_with_answers,
+        2: new_poll2 },
+    pollResponses: {},
+    pollPaneMode: 'PollsList'
 };
 
 
@@ -33,12 +38,11 @@ ReducerRegistry.register(
             };
 
         case NEW_POLL: {
-            pollId = action.poll.pollId;
-            const newState = { ...state };
 
-            state.polls[pollId] = action.poll;
-
-            return newState;
+            return { ...state,
+                polls: { ...state.polls,
+                    [action.poll.pollId]: action.poll }
+            };
         }
 
         case NEW_POLL_RESPONSE: {
@@ -58,6 +62,14 @@ ReducerRegistry.register(
                 pollResponses: newPollResponse
             };
         }
+
+        case OPEN_POLL_CREATION_PAGE: {
+            return { ...state,
+                pollPaneMode: 'pollCreation' };
+        }
+
+        case OPEN_POLL_DETAIL_PAGE: { return { ...state,
+            pollPaneMode: 'pollDetail' }; }
 
         default:
             return state;

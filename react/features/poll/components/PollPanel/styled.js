@@ -238,16 +238,17 @@ export const ParticipantContent = styled.div`
   display: flex;
   flex: 1;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   padding-right: ${props => props.theme.panePadding}px;
 `;
 
+// margin: 0 -${props => props.theme.panePadding}px;
 export const ParticipantContainer = styled.div`
   align-items: center;
   color: white;
   display: flex;
   font-size: 13px;
-  height: ${props => props.theme.participantItemHeight}px;
+  height: ${props => props.theme.participantItemHeight * 1.5}px;
   margin: 0 -${props => props.theme.panePadding}px;
   padding-left: ${props => props.theme.panePadding}px;
   position: relative;
@@ -279,17 +280,20 @@ export const ParticipantInviteButton = styled(Button).attrs({
   }
 `;
 
+// text-overflow: ellipsis;
+//   white-space: nowrap;
 export const ParticipantName = styled.div`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow: auto;
+  height: 100%;
+  padding-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const ParticipantNameContainer = styled.div`
   display: flex;
   flex: 1;
   margin-right: 8px;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 export const ParticipantStates = styled.div`

@@ -1,7 +1,7 @@
 
 export const new_poll = {
     creatorParticipantId: '123456',
-    pollId: '1',
+    pollId: '999',
     title: 'Who am I?',
     options: {
         'Allen': 0,
@@ -13,10 +13,10 @@ export const new_poll = {
 
 export const poll_with_answers = {
     creatorParticipantId: '123456',
-    pollId: '1',
-    title: 'Who am I?',
+    pollId: '123',
+    title: 'Who am I? asddddddb dddddddd dddddd ',
     options: {
-        'Allen': ['123'],
+        'Allen': [ '123' ],
         'Ansh': []
     },
     allowCustomizedAnswer: false

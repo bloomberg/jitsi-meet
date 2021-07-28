@@ -1,3 +1,4 @@
+// @flow
 import { Dispatch } from 'redux';
 
 import { translate } from '../../../../base/i18n';

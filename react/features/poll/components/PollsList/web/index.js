@@ -1,1 +1,3 @@
-export { default as PollsList } from './PollsList';
+export { PollsList } from './PollsList';
+
+export { CreatePollButton } from './CreatePollButton';
