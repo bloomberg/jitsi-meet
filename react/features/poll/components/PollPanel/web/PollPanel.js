@@ -13,7 +13,7 @@ import { new_response } from '../../../mock_data/mock_pollResponse';
 import theme from '../../../theme.json';
 
 // import { CreatePollButton, PollsList } from '../../PollsList';
-import { PollsList, CreatePollButton } from '../../PollsList/';
+import { PollsList, CreatePollButton, PollCreation, PollDetail } from '../../PollsList/';
 
 // TO BE FIXED
 // import { CreatePollButton } from '../../PollsList/web/CreatePollButton';
@@ -62,13 +62,7 @@ const PollsPane = () => {
             }
         };
 
-        // console.log(msg);
         conference.sendMessage(msg);
-
-    });
-
-    const createPoll = useCallback(() => {
-        console.log('Create Poll');
 
     });
 
@@ -93,6 +87,8 @@ const PollsPane = () => {
                     </Header>
                     <Container>
                         <PollsList />
+                        <PollDetail />
+                        <PollCreation />
                         {/* <button onClick = { sendPollMessage }>New Poll</button>
                         <button onClick = { sendPollResponseMessage }>New Poll Response</button> */}
                     </Container>

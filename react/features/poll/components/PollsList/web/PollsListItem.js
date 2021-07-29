@@ -26,7 +26,6 @@ export const PollsListItem = ({ poll: p }: Props) => {
     const toggleDetailView = p => {
         dispatch(openPollDetailPage(p), [ dispatch ]);
     };
-    const test = useSelector(state => console.log(state));
 
     return (<ParticipantContainer>
         <ParticipantContent onClick = { () => toggleDetailView(p) }>

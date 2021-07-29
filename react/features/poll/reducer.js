@@ -16,6 +16,8 @@ const DEFAULT_STATE = {
     polls: { 123: poll_with_answers,
         2: new_poll2 },
     pollResponses: {},
+
+    // PollsList, pollCreation, PollDetail
     pollPaneMode: 'PollsList',
     pollSelected: {}
 };
@@ -66,11 +68,11 @@ ReducerRegistry.register(
 
         case OPEN_POLL_CREATION_PAGE: {
             return { ...state,
-                pollPaneMode: 'pollCreation' };
+                pollPaneMode: 'PollCreate' };
         }
 
         case OPEN_POLL_DETAIL_PAGE: { return { ...state,
-            pollPaneMode: 'pollDetail',
+            pollPaneMode: 'PollDetail',
             pollSelected: action.poll }; }
 
         default:
