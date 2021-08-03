@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { ReducerRegistry } from '../base/redux';
 
 import {
@@ -6,15 +8,14 @@ import {
     NEW_POLL,
     NEW_POLL_RESPONSE,
     OPEN_POLL_CREATION_PAGE,
-    OPEN_POLL_DETAIL_PAGE
+    OPEN_POLL_DETAIL_PAGE,
+    OPEN_POLLSLIST_PAGE
 } from './actionTypes';
 import { REDUCER_KEY } from './constants';
-import { poll_with_answers, new_poll2 } from './mock_data/mock_poll';
 
 const DEFAULT_STATE = {
     isOpen: false,
-    polls: { 123: poll_with_answers,
-        2: new_poll2 },
+    polls: {},
     pollResponses: {},
 
     // PollsList, pollCreation, PollDetail
@@ -49,21 +50,39 @@ ReducerRegistry.register(
         }
 
         case NEW_POLL_RESPONSE: {
-            pollId = action.response.pollId;
-            const participantId = action.response.participantId;
-            const newPollResponse = { ...action.response };
+            const oldResponse = _.get(state.pollResponses, action.response.pollId);
 
-            if (pollId in state.pollResponses) {
-                newPollResponse.pollId[participantId] = action.response;
-            } else {
-                newPollResponse[pollId] = {};
-                newPollResponse[pollId][participantId] = action.response;
-            }
+            console.log(oldResponse);
+            const pollResponses = { ...state.pollResponses,
+                [action.response.pollId]: { ...oldResponse,
+                    [action.response.participantId]: action.response } };
+            const options = {};
 
-            return {
-                ...state,
-                pollResponses: newPollResponse
+            Object.keys(state.polls[action.response.pollId].options).forEach(option => {
+                options[option] = 0;
+
+                return;
+            });
+
+
+            Object.values(pollResponses[action.response.pollId]).forEach(pollResponse => {
+                const vote = pollResponse.answer[0];
+
+                options[vote] += 1;
+
+                return;
+            });
+            console.log(options);
+
+            return { ...state,
+                pollResponses,
+                polls: { ...state.polls,
+                    [action.response.pollId]: { ...state.polls[action.response.pollId],
+                        options } },
+                pollSelected: { ...state.pollSelected,
+                    options }
             };
+
         }
 
         case OPEN_POLL_CREATION_PAGE: {
@@ -74,6 +93,10 @@ ReducerRegistry.register(
         case OPEN_POLL_DETAIL_PAGE: { return { ...state,
             pollPaneMode: 'PollDetail',
             pollSelected: action.poll }; }
+
+        case OPEN_POLLSLIST_PAGE: { return { ...state,
+            pollPaneMode: 'PollsList',
+            pollSelected: {} }; }
 
         default:
             return state;
