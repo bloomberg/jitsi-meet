@@ -1,8 +1,14 @@
 // @flow
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { NEW_POLL } from '../../../actionTypes';
+import { openPollsListPage } from '../../../actions';
+import {
+    Close
+} from '../../PollPanel/styled';
 type Props = {
 
     poll: Object
@@ -10,29 +16,89 @@ type Props = {
 
 
 export const PollCreation = ({ poll: p }: Props) => {
-    const [ options, setOptions ] = useState([ 'option1', 'option2' ]);
+    // const [ options, setOptions ] = useState([ 'option1', 'option2' ]);
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
+    const conference = useSelector(state => state['features/base/conference'].conference);
+    const participant = useSelector(state => state['features/base/participants'].local);
+    const sendPollMessage = useCallback(poll => {
+        conference.sendMessage({
+            type: NEW_POLL,
+            poll
+        });
+    });
+    const onSubmit = data => {
+        const options = {};
+
+        data.options.forEach(option => {
+            options[option.option] = 0;
+        });
+        const poll = { creatorParticipantId: participant.id,
+            pollId: Math.floor(Math.random() * 899999 + 100000),
+            title: data.title,
+            allowCustomizedAnswer: false,
+            options };
+
+        sendPollMessage(poll);
+        togglePollsListMode();
+    };
+
+    const { register, control, handleSubmit, reset, watch } = useForm({
+        defaultValues: { 'options': [ {}, {} ]
+        }
+    });
+    const { fields, append, remove } = useFieldArray(
+        {
+            control,
+            name: 'options'
+        }
+    );
 
     if (pollPaneMode !== 'PollCreate') {
         return <div />;
     }
 
-    return (<form onSubmit = { handleSubmit(onSubmit) }>
-        <input
-            { ...register('title', { required: true }) } />
-        {errors.exampleRequired && <span>This field is required</span>}
-        <br />
+    return (
         <div>
-            {options.map(option => (<label><input
-                type = 'radio'
-                key = { option }
-                value = { option } />{option}</label >))}
-        </div>
+            <Close
+                aria-label = { t('participants_pane.close', 'Close') }
+                onClick = { togglePollsListMode }
+                role = 'button'
+                tabIndex = { 0 } />
+            <form onSubmit = { handleSubmit(onSubmit) }>
+                <input
+                    { ...register('title', { required: true }) } />
+                <br />
+                <ul>
+                    {fields.map((item, index) => (
+                        <li key = { item.id }>
+                            <input
+                                { ...register(`options.${index}.option`) } />
 
-        <button type = 'submit'>Submit</button>
-    </form>);
+                            <button
+                                type = 'button'
+                                onClick = { () => remove(index) }> Delete
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+
+                <button
+                    type = 'button'
+                    onClick = { () => {
+                        append({ option: '' });
+                    } }>
+          append
+                </button>
+                <br />
+                <input
+                    { ...register('customizedAnswers') }
+                    type = 'checkbox' /> Allow customized answers
+                <br />
+                <input type = 'submit' />
+            </form>
+        </div>);
 };

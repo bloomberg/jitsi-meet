@@ -53,19 +53,6 @@ const PollsPane = () => {
         });
     });
 
-    const sendPollResponseMessage = useCallback(() => {
-        const msg = {
-            type: NEW_POLL_RESPONSE,
-            response: {
-                ...new_response,
-                participantId: participant.id
-            }
-        };
-
-        conference.sendMessage(msg);
-
-    });
-
 
     return (
         <ThemeProvider theme = { theme }>
@@ -79,7 +66,7 @@ const PollsPane = () => {
                 <div className = 'participants_pane-content'>
                     <Header>
                         <Close
-                            aria-label = { t('participants_pane.close', 'Clos e') }
+                            aria-label = { t('participants_pane.close', 'Close') }
                             onClick = { closePane }
                             onKeyPress = { closePaneKeyPress }
                             role = 'button'

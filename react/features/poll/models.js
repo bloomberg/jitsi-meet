@@ -1,3 +1,5 @@
+
+// @flow
 export type PollResponse = {
 
   participantId: String,
@@ -8,7 +10,7 @@ export type PollResponse = {
   pollId: String,
 
   /**
-   * An array of boolean: true if the answer was chosen by the responder, else false
+   * An array of String
    */
   answer: Array<String>
 };
