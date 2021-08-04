@@ -15,7 +15,7 @@ type Props = {
 };
 
 
-export const PollCreation = ({ poll: p }: Props) => {
+export const PollCreation = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
@@ -43,7 +43,7 @@ export const PollCreation = ({ poll: p }: Props) => {
         togglePollsListMode();
     };
 
-    const { register, control, handleSubmit, reset, watch } = useForm({
+    const { register, control, handleSubmit } = useForm({
         defaultValues: { 'options': [ {}, {} ]
         }
     });
@@ -72,18 +72,18 @@ export const PollCreation = ({ poll: p }: Props) => {
                                 { ...register(`options.${index}.option`) } />
 
                             <button
-                                type = 'button'
-                                onClick = { () => remove(index) }> Delete
+                                onClick = { () => remove(index) }
+                                type = 'button'> Delete
                             </button>
                         </li>
                     ))}
                 </ul>
 
                 <button
-                    type = 'button'
                     onClick = { () => {
                         append({ option: '' });
-                    } }>
+                    } }
+                    type = 'button'>
           +
                 </button>
                 <br />
