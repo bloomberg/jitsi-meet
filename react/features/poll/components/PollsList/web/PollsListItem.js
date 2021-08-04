@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 
 import { openPollDetailPage } from '../../../actions';
 import {
-    ParticipantContainer,
-    ParticipantContent,
-    ParticipantName,
-    ParticipantNameContainer
+    PollsContainer,
+    PollsContent,
+    PollsTitle,
+    PollsTitleContainer
 } from '../../PollPanel/styled';
 type Props = {
 
@@ -26,14 +26,14 @@ export const PollsListItem = ({ poll: p }: Props) => {
         dispatch(openPollDetailPage(p), [ dispatch ]);
     };
 
-    return (<ParticipantContainer>
-        <ParticipantContent onClick = { () => toggleDetailView(p) }>
-            <ParticipantNameContainer>
-                <ParticipantName>
+    return (<PollsContainer>
+        <PollsContent onClick = { () => toggleDetailView(p) }>
+            <PollsTitleContainer>
+                <PollsTitle>
                     { t(p.title) }
-                </ParticipantName>
-            </ParticipantNameContainer>
-        </ParticipantContent>
-    </ParticipantContainer>);
+                </PollsTitle>
+            </PollsTitleContainer>
+        </PollsContent>
+    </PollsContainer>);
 };
 

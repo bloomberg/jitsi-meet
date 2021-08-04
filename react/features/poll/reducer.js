@@ -48,8 +48,6 @@ ReducerRegistry.register(
 
         case NEW_POLL_RESPONSE: {
             const oldResponse = _.get(state.pollResponses, action.response.pollId);
-
-            console.log(oldResponse);
             const pollResponses = { ...state.pollResponses,
                 [action.response.pollId]: { ...oldResponse,
                     [action.response.participantId]: action.response } };

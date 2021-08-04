@@ -18,7 +18,6 @@ export function CreatePollButton() {
     const { t } = useTranslation();
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const createPoll = useCallback(() => {
-        console.log('CREATE NEW POLL');
         dispatch(openPollCreationPage(), [ dispatch ]);
     });
 
