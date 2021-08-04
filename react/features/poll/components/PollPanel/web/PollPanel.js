@@ -31,7 +31,6 @@ const PollsPane = () => {
     }, [ closePane ]);
 
     const renderContent = () => {
-        console.log(pollPaneMode);
         switch (pollPaneMode) {
         case 'PollsList': return <PollsList />;
         case 'PollDetail': return <PollDetail />;
