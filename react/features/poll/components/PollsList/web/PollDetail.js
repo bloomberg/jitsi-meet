@@ -14,10 +14,9 @@ import {
 export const PollDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const pollSelected = useSelector(state => state['features/poll'].pollSelected);
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);
@@ -39,10 +38,6 @@ export const PollDetail = () => {
         sendPollResponseMessage(data);
     };
 
-
-    if (pollPaneMode !== 'PollDetail') {
-        return <div />;
-    }
     const options = _.get(pollSelected, 'options');
 
     return (<div>

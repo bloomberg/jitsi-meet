@@ -1,6 +1,6 @@
 // @flow
 import { makeStyles } from '@material-ui/core/styles';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 

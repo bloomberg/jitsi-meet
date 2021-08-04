@@ -1,4 +1,5 @@
-import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE, OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE } from './actionTypes';
+import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE,
+    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE } from './actionTypes';
 
 /**
  * Action to close the participants pane.
@@ -48,9 +49,8 @@ export const openPollDetailPage = poll => {
     };
 };
 
-export const openPollsListPage = poll => {
+export const openPollsListPage = () => {
     return {
-        type: OPEN_POLLSLIST_PAGE,
-        poll
+        type: OPEN_POLLSLIST_PAGE
     };
 };

@@ -18,11 +18,20 @@ type Props = AbstractButtonProps & {
   dispatch: Dispatch<any>
 };
 
-
+/**
+ * PollButton component.
+ *
+ * @returns {any} Arg.
+ */
 class PollButton extends AbstractButton<Props, *> {
   icon = PollIcon;
   label = 'Polls';
 
+  /**
+ * _handleClick.
+ *
+ * @returns {void} .
+ */
   _handleClick() {
       const paneOpen = this.props.isOpen;
 
@@ -35,7 +44,14 @@ class PollButton extends AbstractButton<Props, *> {
 
 }
 
-function _mapStateToProps(state: Object, ownProps: Props): Object {
+/**
+ *_MapStateToProps.
+ *
+ * @param {Object} state - State.
+ * @param {Object} ownProps - Props.
+ * @returns {Object} State.
+ */
+function _mapStateToProps(state: Object): Object {
     const { isOpen } = state['features/poll'];
 
     return {
