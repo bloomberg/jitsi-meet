@@ -17,8 +17,6 @@ const DEFAULT_STATE = {
     isOpen: false,
     polls: {},
     pollResponses: {},
-
-    // PollsList, pollCreation, PollDetail
     pollPaneMode: 'PollsList',
     pollSelected: {}
 };
@@ -26,7 +24,6 @@ const DEFAULT_STATE = {
 
 ReducerRegistry.register(
     REDUCER_KEY, (state = DEFAULT_STATE, action) => {
-        let pollId;
 
         switch (action.type) {
         case POLLS_PANE_CLOSE:
@@ -72,7 +69,6 @@ ReducerRegistry.register(
 
                 return;
             });
-            console.log(options);
 
             return { ...state,
                 pollResponses,

@@ -17,7 +17,7 @@ export type PollResponse = {
 
 export type Poll = {
 
-  creatorParticipantId: string,
+  creatorParticipantId: String,
 
   /**
    * ID of the parent Poll of this answer
