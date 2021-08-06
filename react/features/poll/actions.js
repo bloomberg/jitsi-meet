@@ -1,5 +1,5 @@
 import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE,
-    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE } from './actionTypes';
+    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, CREATED_CUSTOMIZED_ANSWER } from './actionTypes';
 
 /**
  * Action to close the participants pane.
@@ -52,5 +52,12 @@ export const openPollDetailPage = poll => {
 export const openPollsListPage = () => {
     return {
         type: OPEN_POLLSLIST_PAGE
+    };
+};
+
+export const createdCustomizedAnswer = pollId => {
+    return {
+        type: CREATED_CUSTOMIZED_ANSWER,
+        pollId
     };
 };

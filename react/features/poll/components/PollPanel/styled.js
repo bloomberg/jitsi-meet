@@ -134,6 +134,7 @@ export const PollsContent = styled.div`
   align-items: center;
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.15);
   display: flex;
+  justify-content: space-between;
   flex: 1;
   height: 100%;
   overflow: auto;
@@ -256,23 +257,55 @@ export const AddOptionsContainer = styled.div`
 `;
 
 
-export const ProgressBar = styled.div`
-background: rgba(255,255,255,0.1);
-justify-content: flex-start;
-border-radius: 100px;
-align-items: center;
-position: relative;
-padding: 0 5px;
-display: flex;
-height: 10px;
-width: 100%;
+// export const ProgressBar = styled.div`
+// background: rgba(255,255,255,0.1);
+// justify-content: flex-start;
+// border-radius: 100px;
+// align-items: center;
+// position: relative;
+// padding: 0 5px;
+// display: flex;
+// height: 10px;
+// width: 100%;
+// `;
+
+// export const Progress = styled.div`
+// animation: load 3s normal forwards;
+// box-shadow: 0 10px 40px -10px #fff;
+// border-radius: 100px;
+// background: #fff;
+// height: 30px;
+// width: 0;
+// `;
+
+export const ProgressBarConatainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;
 
-export const Progress = styled.div`
-animation: load 3s normal forwards;
-box-shadow: 0 10px 40px -10px #fff;
-border-radius: 100px;
-background: #fff;
-height: 30px;
-width: 0;
+export const ProgressBarComplete = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 100%;
+  background-color: #5225bd;
+  z-index: 2;
+`;
+
+export const ProgressBarLiquid = styled.div`
+  z-index: 1;
+  height: 100%;
+  position: absolute;
+        right: -5px;
+        top: -10px;
+        background-color: #5225bd;
+`;
+
+export const Progress = styled.span`
+  z-index: 2;
 `;
