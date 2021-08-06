@@ -3,11 +3,22 @@ import React, { useCallback } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
 import { NEW_POLL } from '../../../actionTypes';
 import { openPollsListPage } from '../../../actions';
+import theme from '../../../theme.json';
 import {
-    Close
+    Button,
+    FooterButton,
+    TitleInput,
+    AddOptionsContainer,
+    Container,
+    Footer,
+    Option,
+    OptionInput,
+    AddOptionsButton,
+    Heading
 } from '../../PollPanel/styled';
 type Props = {
 
@@ -33,10 +44,12 @@ export const PollCreation = () => {
         data.options.forEach(option => {
             options[option.option] = 0;
         });
+
+        const time = Date.now().toString();
         const poll = { creatorParticipantId: participant.id,
-            pollId: Math.floor(Math.random() * 899999 + 100000),
+            pollId: `${time}_${Math.floor(Math.random() * 899999 + 100000).toString()}`,
             title: data.title,
-            allowCustomizedAnswer: false,
+            allowCustomizedAnswer: data.customizedAnswer,
             options };
 
         sendPollMessage(poll);
@@ -55,43 +68,62 @@ export const PollCreation = () => {
     );
 
     return (
-        <div>
-            <Close
-                aria-label = { t('participants_pane.close', 'Close') }
-                onClick = { togglePollsListMode }
-                role = 'button'
-                tabIndex = { 0 } />
+        <ThemeProvider theme = { theme }>
+
             <form onSubmit = { handleSubmit(onSubmit) }>
-                <input
-                    { ...register('title', { required: true }) } />
-                <br />
-                <ul>
-                    {fields.map((item, index) => (
-                        <li key = { item.id }>
-                            <input
-                                { ...register(`options.${index}.option`) } />
+                <Container>
+                    <Heading>Title</Heading>
+                    <TitleInput
+                        placeholder = 'Title...'
+                        { ...register('title', { required: true }) } />
+                    <Heading>Options</Heading>
+                    <AddOptionsContainer>
+                        {fields.map((item, index) => (
+                            <Option key = { item.id }>
+                                <OptionInput
+                                    placeholder = 'Option...'
+                                    { ...register(`options.${index}.option`, { required: true }) } />
+                                {/* <div className = { `chat-input-container${this.state.message.trim().length ? ' populated' : ''}` }>
+                                    <div id = 'chat-input' >
+                                        <div className = 'usrmsg-form'>
+                                            <TextareaAutosize
+                                                autoComplete = 'off'
+                                                autoFocus = { true }
+                                                id = 'usermsg'
+                                                maxRows = { 5 }
+                                                onChange = { this._onMessageChange }
+                                                onHeightChange = { this.props.onResize }
+                                                onKeyDown = { this._onDetectSubmit }
+                                                placeholder = { this.props.t('chat.messagebox') }
+                                                ref = { this._setTextAreaRef }
+                                                tabIndex = { 0 }
+                                                value = { this.state.message } />
+                                        </div>
+                                    </div>
+                                </div> */}
+                                <Button
+                                    onClick = { () => remove(index) }
+                                    type = 'button'> X
+                                </Button>
+                            </Option>
+                        ))}
+                        <AddOptionsButton
+                            onClick = { () => {
+                                append({ option: '' });
+                            } }
+                            type = 'button'>
+                        +
+                        </AddOptionsButton>
+                    </AddOptionsContainer>
+                    <input
+                        { ...register('customizedAnswer') }
+                        type = 'checkbox' /> Allow customized answers
+                </Container>
+                <Footer>
+                    <FooterButton onClick = { togglePollsListMode }> Cancel </FooterButton>
+                    <FooterButton type = 'submit'> Create </FooterButton>
+                </Footer>
 
-                            <button
-                                onClick = { () => remove(index) }
-                                type = 'button'> Delete
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-
-                <button
-                    onClick = { () => {
-                        append({ option: '' });
-                    } }
-                    type = 'button'>
-          +
-                </button>
-                <br />
-                <input
-                    { ...register('customizedAnswers') }
-                    type = 'checkbox' /> Allow customized answers
-                <br />
-                <input type = 'submit' />
             </form>
-        </div>);
+        </ThemeProvider>);
 };

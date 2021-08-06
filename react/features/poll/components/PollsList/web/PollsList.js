@@ -6,8 +6,11 @@ import { useSelector } from 'react-redux';
 
 import { withPixelLineHeight } from '../../../../base/styles/functions.web';
 import { getPolls } from '../../../functions';
+import { Heading, PollCreateButton } from '../../PollPanel/styled';
 
+import { CreatePollButton } from './CreatePollButton';
 import { PollsListItem } from './PollsListItem';
+
 
 const useStyles = makeStyles(theme => {
     return {
@@ -37,22 +40,22 @@ const useStyles = makeStyles(theme => {
 export function PollsList() {
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const { t } = useTranslation();
-    const classes = useStyles();
     const polls = useSelector(getPolls);
+    const sorted = Object.values(polls).sort();
 
+    console.log(sorted);
     if (pollPaneMode !== 'PollsList') {
         return <div />;
     }
 
     return (
         <>
-            <div className = { classes.headingContainer }>
-                <div className = { classes.heading }>
-                    {t('Polls')}
-                </div>
-            </div>
+            <Heading>
+                {t('Polls')}
+            </Heading>
+            <CreatePollButton />
             <div>
-                {Object.values(polls).map(p => (<PollsListItem
+                {sorted.map(p => (<PollsListItem
                     key = { p.id }
                     poll = { p } />))}
             </div>

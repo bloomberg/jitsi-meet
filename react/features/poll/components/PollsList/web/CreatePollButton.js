@@ -1,11 +1,11 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { openPollCreationPage } from '../../../actions';
 import {
-    FooterButton
+    PollCreateButton
 } from '../../PollPanel/styled';
 
 /**
@@ -16,17 +16,12 @@ import {
 export function CreatePollButton() {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const createPoll = useCallback(() => {
         dispatch(openPollCreationPage(), [ dispatch ]);
     });
 
-    if (pollPaneMode !== 'PollsList') {
-        return <div />;
-    }
-
-    return (<FooterButton onClick = { createPoll }>
-        {t('Create New Poll')}
-    </FooterButton>);
+    return (<PollCreateButton onClick = { createPoll }>
+        Create New Poll
+    </PollCreateButton>);
 }
 

@@ -26,6 +26,25 @@ export const Button = styled.button`
   }
 `;
 
+export const AddOptionsButton = styled(Button)`
+  align-self: center;
+  font-size: 15px;
+`;
+
+
+export const PollCreateButton = styled(Button).attrs({
+    primary: true
+})`
+font-size: 15px;
+height: 40px;
+width: 100%;
+
+& > *:not(:last-child) {
+  margin-right: 8px;
+}
+`;
+
+
 export const Container = styled.div`
   box-sizing: border-box;
   flex: 1;
@@ -40,6 +59,14 @@ export const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+export const Heading = styled.div`
+  color: #d1dbe8;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 24px;
+  margin: 8px 0 ${props => props.theme.panePadding}px;
 `;
 
 export const Close = styled.div`
@@ -138,6 +165,31 @@ export const PollsContainer = styled.div`
   ${props => !props.isHighlighted && '}'}
 `;
 
+export const PollOptionsContainer = styled.div`
+  align-items: center;
+  color: white;
+  display: flex;
+  font-size: 13px;
+  height: ${props => props.theme.participantItemHeight}px;
+  margin: 0 -${props => props.theme.panePadding}px;
+  padding-left: ${props => props.theme.panePadding}px;
+  position: relative;
+
+  ${props => !props.isHighlighted && '&:hover {'}
+    background-color: #292929;
+
+    & ${PollsActions} {
+      ${props => props.trigger === ActionTrigger.Hover && `
+        display: flex;
+      `}
+    }
+
+    & ${PollsContent} {
+      box-shadow: none;
+    }
+  ${props => !props.isHighlighted && '}'}
+`;
+
 export const PollsTitle = styled.div`
   overflow: auto;
   height: 100%;
@@ -145,9 +197,82 @@ export const PollsTitle = styled.div`
   margin-bottom: 10px;
 `;
 
+export const PollOptionsTitle = styled.div`
+  overflow: auto;
+  height: 100%;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+`;
+
 export const PollsTitleContainer = styled.div`
   display: flex;
   flex: 1;
   margin-right: 8px;
   overflow: auto;
+`;
+
+export const TitleInput = styled.input`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+`;
+
+
+export const Option = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 15px;
+  height: 25px;
+
+`;
+
+export const OptionInput = styled.input`
+  display: block;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: 1px solid white;
+`;
+
+export const CustomizedAnswerInput = styled.input`
+  display: block;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: 1px solid white;
+  height: 80%;
+`;
+
+
+export const AddOptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+
+export const ProgressBar = styled.div`
+background: rgba(255,255,255,0.1);
+justify-content: flex-start;
+border-radius: 100px;
+align-items: center;
+position: relative;
+padding: 0 5px;
+display: flex;
+height: 10px;
+width: 100%;
+`;
+
+export const Progress = styled.div`
+animation: load 3s normal forwards;
+box-shadow: 0 10px 40px -10px #fff;
+border-radius: 100px;
+background: #fff;
+height: 30px;
+width: 0;
 `;

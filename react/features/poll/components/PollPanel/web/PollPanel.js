@@ -13,7 +13,8 @@ import {
     Close,
     Container,
     Footer,
-    Header
+    Header,
+    PollCreateButton
 } from '../styled';
 
 const PollsPane = () => {
@@ -32,10 +33,9 @@ const PollsPane = () => {
 
     const renderContent = () => {
         switch (pollPaneMode) {
-        case 'PollsList': return <PollsList />;
         case 'PollDetail': return <PollDetail />;
         case 'PollCreate': return <PollCreation />;
-        default: return <p>TEST</p>;
+        default: return <PollsList />;
         }
     };
 
@@ -58,11 +58,12 @@ const PollsPane = () => {
                             tabIndex = { 0 } />
                     </Header>
                     <Container>
+                        {/* <PollCreateButton>
+                            <CreatePollButton />
+                        </PollCreateButton> */}
                         {renderContent()}
                     </Container>
-                    <Footer>
-                        <CreatePollButton />
-                    </Footer>
+                    <Footer />
                 </div >
             </div >
         </ThemeProvider >
