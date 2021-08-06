@@ -9,7 +9,8 @@ import {
     NEW_POLL_RESPONSE,
     OPEN_POLL_CREATION_PAGE,
     OPEN_POLL_DETAIL_PAGE,
-    OPEN_POLLSLIST_PAGE
+    OPEN_POLLSLIST_PAGE,
+    CREATED_CUSTOMIZED_ANSWER
 } from './actionTypes';
 import { REDUCER_KEY } from './constants';
 
@@ -18,7 +19,8 @@ const DEFAULT_STATE = {
     polls: {},
     pollResponses: {},
     pollPaneMode: 'PollsList',
-    pollSelected: {}
+    pollSelected: {},
+    createdCustomizedAnswer: {}
 };
 
 
@@ -42,7 +44,10 @@ ReducerRegistry.register(
 
             return { ...state,
                 polls: { ...state.polls,
-                    [action.poll.pollId]: action.poll }
+                    [action.poll.pollId]: action.poll
+                },
+                createdCustomizedAnswer: { ...state.createdCustomizedAnswer,
+                    [action.poll.pollId]: true }
             };
         }
 
@@ -96,6 +101,10 @@ ReducerRegistry.register(
         case OPEN_POLLSLIST_PAGE: { return { ...state,
             pollPaneMode: 'PollsList',
             pollSelected: {} }; }
+
+        case CREATED_CUSTOMIZED_ANSWER: { return { ...state,
+            createdCustomizedAnswer: { ...state.createdCustomizedAnswer,
+                [action.pollId]: false } }; }
 
         default:
             return state;

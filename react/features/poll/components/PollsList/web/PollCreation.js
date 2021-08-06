@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
@@ -67,6 +67,8 @@ export const PollCreation = () => {
         }
     );
 
+    console.log(fields);
+
     return (
         <ThemeProvider theme = { theme }>
 
@@ -80,30 +82,16 @@ export const PollCreation = () => {
                     <AddOptionsContainer>
                         {fields.map((item, index) => (
                             <Option key = { item.id }>
-                                <OptionInput
+                                <input
+                                    styles = {{ display: 'block',
+                                        boxSizing: 'border-box',
+                                        borderRadius: '2px',
+                                        border: '1px solid white' }}
                                     placeholder = 'Option...'
-                                    { ...register(`options.${index}.option`, { required: true }) } />
-                                {/* <div className = { `chat-input-container${this.state.message.trim().length ? ' populated' : ''}` }>
-                                    <div id = 'chat-input' >
-                                        <div className = 'usrmsg-form'>
-                                            <TextareaAutosize
-                                                autoComplete = 'off'
-                                                autoFocus = { true }
-                                                id = 'usermsg'
-                                                maxRows = { 5 }
-                                                onChange = { this._onMessageChange }
-                                                onHeightChange = { this.props.onResize }
-                                                onKeyDown = { this._onDetectSubmit }
-                                                placeholder = { this.props.t('chat.messagebox') }
-                                                ref = { this._setTextAreaRef }
-                                                tabIndex = { 0 }
-                                                value = { this.state.message } />
-                                        </div>
-                                    </div>
-                                </div> */}
+                                    { ...register(`options.${index}.option`) } />
                                 <Button
                                     onClick = { () => remove(index) }
-                                    type = 'button'> X
+                                    type = 'button'> x
                                 </Button>
                             </Option>
                         ))}
