@@ -64,15 +64,15 @@ export const PollDetail = () => {
                         <div key = { option }>
                             <PollOptionsContainer>
                                 <PollsContent onClick = { () => sendPollResponseMessage(option) }>
-                                    <PollsTitleContainer>
-                                        {/* <PollOptionsTitle>
+                                    {/* <PollsTitleContainer> */}
+                                    {/* <PollOptionsTitle>
                                             { t(option) }
                                         </PollOptionsTitle> */}
-                                        <ProgressBar
-                                            text = { option }
-                                            percentage = { ((pollSelected.options[option] * 100) / totalVotes) || 0 } />
-                                        {/* {pollSelected.options[option]} */}
-                                    </PollsTitleContainer>
+                                    <ProgressBar
+                                        text = { option }
+                                        percentage = { ((pollSelected.options[option] * 100) / totalVotes) || 0 } />
+                                    {/* {pollSelected.options[option]} */}
+                                    {/* </PollsTitleContainer> */}
                                 </PollsContent>
                             </PollOptionsContainer>
 
