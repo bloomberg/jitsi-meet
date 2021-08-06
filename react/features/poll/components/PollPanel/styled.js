@@ -176,18 +176,7 @@ export const PollOptionsContainer = styled.div`
   padding-left: ${props => props.theme.panePadding}px;
   position: relative;
 
-  ${props => !props.isHighlighted && '&:hover {'}
-    background-color: #292929;
-
-    & ${PollsActions} {
-      ${props => props.trigger === ActionTrigger.Hover && `
-        display: flex;
-      `}
-    }
-
-    & ${PollsContent} {
-      box-shadow: none;
-    }
+  
   ${props => !props.isHighlighted && '}'}
 `;
 
@@ -286,6 +275,9 @@ export const ProgressBarConatainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  &:hover {
+    opacity: 0.8;
+    }
 `;
 
 export const ProgressBarComplete = styled.div`
@@ -301,9 +293,10 @@ export const ProgressBarLiquid = styled.div`
   z-index: 1;
   height: 100%;
   position: absolute;
-        right: -5px;
-        top: -10px;
-        background-color: #5225bd;
+  right: -5px;
+  top: -10px;
+  background-color: #5225bd;
+  
 `;
 
 export const Progress = styled.span`
