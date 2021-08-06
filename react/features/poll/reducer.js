@@ -63,7 +63,12 @@ ReducerRegistry.register(
             Object.values(pollResponses[action.response.pollId]).forEach(pollResponse => {
                 const vote = pollResponse.answer[0];
 
-                options[vote] += 1;
+                if (options[vote]) {
+                    options[vote] += 1;
+                } else {
+                    options[vote] = 1;
+                }
+
 
                 return;
             });

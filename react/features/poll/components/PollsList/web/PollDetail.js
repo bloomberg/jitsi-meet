@@ -1,14 +1,28 @@
 // @flow
 import _ from 'lodash';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
 import { NEW_POLL_RESPONSE } from '../../../actionTypes';
 import { openPollsListPage } from '../../../actions';
+import theme from '../../../theme.json';
 import {
-    Close
+    PollOptionsContainer,
+    PollsContent,
+    PollOptionsTitle,
+    PollsTitleContainer,
+    FooterButton,
+    Container,
+    Footer,
+    Header,
+    Heading,
+    CustomizedAnswerInput,
+    Button,
+    ProgressBar,
+    Progress
 } from '../../PollPanel/styled';
 
 export const PollDetail = () => {
@@ -21,10 +35,10 @@ export const PollDetail = () => {
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);
 
-    const sendPollResponseMessage = useCallback(res => {
+    const sendPollResponseMessage = useCallback(option => {
         const newResponse = { pollId: pollSelected.pollId,
             participantId: participant.id,
-            answer: [ res.response ] };
+            answer: [ option ] };
 
         const msg = {
             type: NEW_POLL_RESPONSE,
@@ -34,33 +48,50 @@ export const PollDetail = () => {
         conference.sendMessage(msg);
     });
 
-    const onSubmit = (data, any) => {
-        sendPollResponseMessage(data);
-    };
-
     const options = _.get(pollSelected, 'options');
 
-    return (<div>
-        <Close
-            aria-label = { t('participants_pane.close', 'Close') }
-            onClick = { togglePollsListMode }
-            role = 'button'
-            tabIndex = { 0 } />
-        <p>{pollSelected.title}</p>
-        <form onSubmit = { handleSubmit(onSubmit) }>
-            {Object.keys(options).map(option =>
-                (
-                    <div key = { option }>
-                        <input
-                            type = 'radio'
-                            value = { option }
-                            { ...register('response') } />
-                        <label >{option}</label>
-                        <label >- {pollSelected.options[option]}</label>
-                    </div>
+    const [ customizedAnswer, setCustomizedAnswer ] = useState('');
 
-                ))}
-            <input type = 'submit' />
-        </form>
+    return (<div>
+        <Header><Heading>{pollSelected.title}</Heading></Header>
+        <Container>
+            <div>
+                {Object.keys(options).map(option =>
+                    (
+                        <div key = { option }>
+                            <PollOptionsContainer>
+                                <PollsContent onClick = { () => sendPollResponseMessage(option) }>
+                                    <PollsTitleContainer>
+                                        <PollOptionsTitle>
+                                            { t(option) }
+                                        </PollOptionsTitle>
+                                        {pollSelected.options[option]}
+                                    </PollsTitleContainer>
+                                </PollsContent>
+                            </PollOptionsContainer>
+
+                        </div>
+
+                    ))}
+                {pollSelected.allowCustomizedAnswer
+                    ? <PollOptionsContainer>
+                        <PollsContent>
+                            <CustomizedAnswerInput
+                                onChange = { e => setCustomizedAnswer(e.target.value) }
+                                value = { customizedAnswer }
+                                placeholder = 'Other ...' />
+                            <Button
+                                onClick = { () => {
+                                    sendPollResponseMessage(customizedAnswer);
+                                } }>+</Button>
+                        </PollsContent>
+                    </PollOptionsContainer>
+                    : <div />}
+            </div>
+        </Container>
+        <Footer>
+            <FooterButton onClick = { togglePollsListMode }> Back</FooterButton>
+        </Footer>
+
     </div>);
 };
