@@ -48,7 +48,7 @@ export const PollDetail = () => {
         conference.sendMessage(msg);
     });
 
-    const options = Object.keys(_.get(pollSelected, 'options')).sort();
+    const options = useSelector(state => state['features/poll'].optionsList);
 
     console.log(pollSelected);
     const [ customizedAnswer, setCustomizedAnswer ] = useState('');
@@ -64,15 +64,9 @@ export const PollDetail = () => {
                         <div key = { option }>
                             <PollOptionsContainer>
                                 <PollsContent onClick = { () => sendPollResponseMessage(option) }>
-                                    {/* <PollsTitleContainer> */}
-                                    {/* <PollOptionsTitle>
-                                            { t(option) }
-                                        </PollOptionsTitle> */}
                                     <ProgressBar
                                         text = { option }
                                         percentage = { Math.floor((pollSelected.options[option] * 100) / totalVotes) || 0 } />
-                                    {/* {pollSelected.options[option]} */}
-                                    {/* </PollsTitleContainer> */}
                                 </PollsContent>
                             </PollOptionsContainer>
 
@@ -106,7 +100,6 @@ export const PollDetail = () => {
 
 export const ProgressBar = props => {
     const { text, percentage } = props;
-    const progress = 60;
 
     return (
         <ProgressBarConatainer>
