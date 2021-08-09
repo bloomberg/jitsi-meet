@@ -22,7 +22,9 @@ import {
     ProgressBarLiquid,
     Progress,
     ProgressBarComplete,
-    ProgressBarConatainer
+    ProgressBarConatainer,
+    ProgressCount,
+    ProgressText
 } from '../../PollPanel/styled';
 
 export const PollDetail = () => {
@@ -50,7 +52,11 @@ export const PollDetail = () => {
 
     const options = useSelector(state => state['features/poll'].optionsList);
 
-    console.log(pollSelected);
+    const participantPollResponse = useSelector(state => _.get(state['features/poll'].pollResponses[pollSelected.pollId], participant.id));
+    const participantAnswerList = _.get(participantPollResponse, 'answer') || [];
+
+    console.log(options);
+
     const [ customizedAnswer, setCustomizedAnswer ] = useState('');
 
     const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + count, 0);
@@ -63,8 +69,11 @@ export const PollDetail = () => {
                     (
                         <div key = { option }>
                             <PollOptionsContainer>
-                                <PollsContent onClick = { () => sendPollResponseMessage(option) }>
+                                <PollsContent
+                                    onClick = { () => sendPollResponseMessage(option) }
+                                    isSelected = { participantAnswerList.includes(option) }>
                                     <ProgressBar
+                                        count = { pollSelected.options[option] }
                                         text = { option }
                                         percentage = { Math.floor((pollSelected.options[option] * 100) / totalVotes) || 0 } />
                                 </PollsContent>
@@ -78,7 +87,6 @@ export const PollDetail = () => {
                         <PollsContent>
                             <CustomizedAnswerInput
                                 onChange = { e => setCustomizedAnswer(e.target.value) }
-                                value = { customizedAnswer }
                                 placeholder = 'Other ...' />
                             <AddOptionsButton
                                 onClick = { () => {
@@ -99,14 +107,18 @@ export const PollDetail = () => {
 
 
 export const ProgressBar = props => {
-    const { text, percentage } = props;
+    const { text, percentage, count } = props;
 
     return (
         <ProgressBarConatainer>
+            <Progress>
+                <ProgressText>{text}</ProgressText>
+                <ProgressCount>{count}</ProgressCount>
+            </Progress>
             <ProgressBarComplete
                 style = {{ width: `${percentage}%` }}>
                 <ProgressBarLiquid />
             </ProgressBarComplete>
-            <Progress>{`${text} (${percentage}%)`}</Progress>
+
         </ProgressBarConatainer>);
 };
