@@ -20,7 +20,8 @@ const DEFAULT_STATE = {
     pollResponses: {},
     pollPaneMode: 'PollsList',
     pollSelected: {},
-    createdCustomizedAnswer: {}
+    createdCustomizedAnswer: {},
+    optionsList: []
 };
 
 
@@ -47,7 +48,8 @@ ReducerRegistry.register(
                     [action.poll.pollId]: action.poll
                 },
                 createdCustomizedAnswer: { ...state.createdCustomizedAnswer,
-                    [action.poll.pollId]: true }
+                    [action.poll.pollId]: true },
+                optionsList: Object.keys(action.poll.options)
             };
         }
 
@@ -63,8 +65,12 @@ ReducerRegistry.register(
 
                 return;
             });
+            const optionsList = [ ...state.optionsList ];
 
+            if (!(action.response.answer[0] in state.polls[action.response.pollId].options)) {
+                optionsList.push(action.response.answer[0]);
 
+            }
             Object.values(pollResponses[action.response.pollId]).forEach(pollResponse => {
                 const vote = pollResponse.answer[0];
 
@@ -84,7 +90,8 @@ ReducerRegistry.register(
                     [action.response.pollId]: { ...state.polls[action.response.pollId],
                         options } },
                 pollSelected: { ...state.pollSelected,
-                    options }
+                    options },
+                optionsList
             };
 
         }
