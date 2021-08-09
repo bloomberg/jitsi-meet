@@ -139,6 +139,9 @@ export const PollsContent = styled.div`
   height: 100%;
   overflow: auto;
   padding-right: ${props => props.theme.panePadding}px;
+  &:hover {
+    opacity: 0.8;
+    }
 `;
 
 export const PollsContainer = styled.div`
@@ -246,27 +249,6 @@ export const AddOptionsContainer = styled.div`
 `;
 
 
-// export const ProgressBar = styled.div`
-// background: rgba(255,255,255,0.1);
-// justify-content: flex-start;
-// border-radius: 100px;
-// align-items: center;
-// position: relative;
-// padding: 0 5px;
-// display: flex;
-// height: 10px;
-// width: 100%;
-// `;
-
-// export const Progress = styled.div`
-// animation: load 3s normal forwards;
-// box-shadow: 0 10px 40px -10px #fff;
-// border-radius: 100px;
-// background: #fff;
-// height: 30px;
-// width: 0;
-// `;
-
 export const ProgressBarConatainer = styled.div`
   position: relative;
   width: 100%;
@@ -275,9 +257,7 @@ export const ProgressBarConatainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  &:hover {
-    opacity: 0.8;
-    }
+  
 `;
 
 export const ProgressBarComplete = styled.div`
@@ -285,7 +265,7 @@ export const ProgressBarComplete = styled.div`
   left: 0;
   top: 0px;
   height: 100%;
-  background-color: #5225bd;
+  background-color: #1F1F5E;
   z-index: 2;
 `;
 
@@ -295,7 +275,7 @@ export const ProgressBarLiquid = styled.div`
   position: absolute;
   right: -5px;
   top: -10px;
-  background-color: #5225bd;
+  background-color: #1F1F5E;
   
 `;
 
