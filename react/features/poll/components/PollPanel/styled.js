@@ -138,10 +138,14 @@ export const PollsContent = styled.div`
   flex: 1;
   height: 100%;
   overflow: auto;
-  padding-right: ${props => props.theme.panePadding}px;
   &:hover {
     opacity: 0.8;
     }
+    ${props => !props.isSelected}
+      background-color: #78797a;
+      
+    
+    
 `;
 
 export const PollsContainer = styled.div`
@@ -177,6 +181,7 @@ export const PollOptionsContainer = styled.div`
   height: ${props => props.theme.participantItemHeight}px;
   margin: 0 -${props => props.theme.panePadding}px;
   padding-left: ${props => props.theme.panePadding}px;
+  padding-right: ${props => props.theme.panePadding}px;
   position: relative;
 
   
@@ -250,35 +255,45 @@ export const AddOptionsContainer = styled.div`
 
 
 export const ProgressBarConatainer = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  
+  flex-direction: column;
+  position: relative;
 `;
 
 export const ProgressBarComplete = styled.div`
   position: absolute;
   left: 0;
-  top: 0px;
-  height: 100%;
-  background-color: #1F1F5E;
-  z-index: 2;
+  bottom: 0px;
+  height: 15%;
+  background-color: #0056E0;
+  z-index: 1;
+  border-radius: 0 20px 20px 0;
 `;
 
 export const ProgressBarLiquid = styled.div`
-  z-index: 1;
-  height: 100%;
-  position: absolute;
-  right: -5px;
-  top: -10px;
-  background-color: #1F1F5E;
+  z-index: 2;
+  background-color: #0056E0;
   
 `;
 
-export const Progress = styled.span`
-  z-index: 2;
+export const Progress = styled.div`
+  z-index: 3;
+  flex-direction: row;
+  justify-content: space-between;
+  width:100%;
+  display: flex;
 `;
+
+export const ProgressCount = styled.span`
+  margin-right: 10px;
+`;
+
+export const ProgressText = styled.span`
+  margin-left: 5px;
+`;
+
