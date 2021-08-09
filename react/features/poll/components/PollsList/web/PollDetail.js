@@ -70,7 +70,7 @@ export const PollDetail = () => {
                                         </PollOptionsTitle> */}
                                     <ProgressBar
                                         text = { option }
-                                        percentage = { ((pollSelected.options[option] * 100) / totalVotes) || 0 } />
+                                        percentage = { Math.floor((pollSelected.options[option] * 100) / totalVotes) || 0 } />
                                     {/* {pollSelected.options[option]} */}
                                     {/* </PollsTitleContainer> */}
                                 </PollsContent>
