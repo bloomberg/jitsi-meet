@@ -8,13 +8,12 @@ import { ThemeProvider } from 'styled-components';
 import { close } from '../../../actions';
 import { classList, getPollsPaneOpen } from '../../../functions';
 import theme from '../../../theme.json';
-import { PollsList, CreatePollButton, PollCreation, PollDetail } from '../../PollsList/';
+import { PollsList, PollCreation, PollDetail } from '../../PollsList/';
 import {
     Close,
     Container,
     Footer,
-    Header,
-    PollCreateButton
+    Header
 } from '../styled';
 
 const PollsPane = () => {
@@ -58,9 +57,6 @@ const PollsPane = () => {
                             tabIndex = { 0 } />
                     </Header>
                     <Container>
-                        {/* <PollCreateButton>
-                            <CreatePollButton />
-                        </PollCreateButton> */}
                         {renderContent()}
                     </Container>
                     <Footer />
