@@ -67,8 +67,6 @@ export const PollCreation = () => {
         }
     );
 
-    console.log(fields);
-
     return (
         <ThemeProvider theme = { theme }>
 
@@ -88,7 +86,7 @@ export const PollCreation = () => {
                                         borderRadius: '2px',
                                         border: '1px solid white' }}
                                     placeholder = 'Option...'
-                                    { ...register(`options.${index}.option`) } />
+                                    { ...register(`options.${index}.option`, { required: true }) } />
                                 <Button
                                     onClick = { () => remove(index) }
                                     type = 'button'> x

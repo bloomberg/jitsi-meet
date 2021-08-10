@@ -9,23 +9,16 @@ import { openPollsListPage, createdCustomizedAnswer } from '../../../actions';
 import {
     PollOptionsContainer,
     PollsContent,
-    PollOptionsTitle,
-    PollsTitleContainer,
     FooterButton,
     Container,
     Footer,
     Header,
     Heading,
     CustomizedAnswerInput,
-    Button,
-    AddOptionsButton,
-    ProgressBarLiquid,
-    Progress,
-    ProgressBarComplete,
-    ProgressBarConatainer,
-    ProgressCount,
-    ProgressText
+    AddOptionsButton
 } from '../../PollPanel/styled';
+
+import { ProgressBar } from './ProgressBar';
 
 export const PollDetail = () => {
     const dispatch = useDispatch();
@@ -90,8 +83,10 @@ export const PollDetail = () => {
                                 placeholder = 'Other ...' />
                             <AddOptionsButton
                                 onClick = { () => {
-                                    sendPollResponseMessage(customizedAnswer);
-                                    disableCustomizedAnswer();
+                                    if (customizedAnswer) {
+                                        sendPollResponseMessage(customizedAnswer);
+                                        disableCustomizedAnswer();
+                                    }
                                 } }>+</AddOptionsButton>
                         </PollsContent>
                     </PollOptionsContainer>
@@ -106,19 +101,19 @@ export const PollDetail = () => {
 };
 
 
-export const ProgressBar = props => {
-    const { text, percentage, count } = props;
+// export const ProgressBar = props => {
+//     const { text, percentage, count } = props;
 
-    return (
-        <ProgressBarConatainer>
-            <Progress>
-                <ProgressText>{text}</ProgressText>
-                <ProgressCount>{count}</ProgressCount>
-            </Progress>
-            <ProgressBarComplete
-                style = {{ width: `${percentage}%` }}>
-                <ProgressBarLiquid />
-            </ProgressBarComplete>
+//     return (
+//         <ProgressBarConatainer>
+//             <Progress>
+//                 <ProgressText>{text}</ProgressText>
+//                 <ProgressCount>{count}</ProgressCount>
+//             </Progress>
+//             <ProgressBarComplete
+//                 style = {{ width: `${percentage}%` }}>
+//                 <ProgressBarLiquid />
+//             </ProgressBarComplete>
 
-        </ProgressBarConatainer>);
-};
+//         </ProgressBarConatainer>);
+// };
