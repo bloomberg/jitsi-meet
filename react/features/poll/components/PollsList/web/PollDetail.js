@@ -43,12 +43,10 @@ export const PollDetail = () => {
         conference.sendMessage(msg);
     });
 
-    const options = useSelector(state => state['features/poll'].optionsList);
+    const options = useSelector(state => state['features/poll'].optionsList[pollSelected.pollId]);
 
     const participantPollResponse = useSelector(state => _.get(state['features/poll'].pollResponses[pollSelected.pollId], participant.id));
     const participantAnswerList = _.get(participantPollResponse, 'answer') || [];
-
-    console.log(options);
 
     const [ customizedAnswer, setCustomizedAnswer ] = useState('');
 
