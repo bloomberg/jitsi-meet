@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import { close } from '../../../actions';
+import { SYNC_POLL } from '../../../actionTypes';
+import { close, setSyncToFalse } from '../../../actions';
 import { classList, getPollsPaneOpen } from '../../../functions';
 import theme from '../../../theme.json';
 import { PollsList, PollCreation, PollDetail } from '../../PollsList/';
@@ -16,19 +17,48 @@ import {
     Header
 } from '../styled';
 
+
 const PollsPane = () => {
     const dispatch = useDispatch();
     const paneOpen = useSelector(getPollsPaneOpen);
     const { t } = useTranslation();
 
     const closePane = useCallback(() => dispatch(close(), [ dispatch ]));
+    const turnSyncOff = useCallback(() => dispatch(setSyncToFalse(), [ dispatch ]));
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
+
     const closePaneKeyPress = useCallback(e => {
         if (closePane && (e.key === ' ' || e.key === 'Enter')) {
             e.preventDefault();
             closePane();
         }
     }, [ closePane ]);
+
+    const sendSyncMsg = useSelector(state => state['features/poll'].sendSyncMsg);
+    const conference = useSelector(state => state['features/base/conference'].conference);
+
+
+    const sendSyncMessage = useCallback((polls, pollResponses, optionsList) => {
+
+        const msg = { polls,
+            pollResponses,
+            optionsList,
+            type: SYNC_POLL };
+
+        if (conference) {
+            conference.sendMessage(msg);
+        }
+
+    });
+
+    const { polls, pollResponses, optionsList } = useSelector(state => state['features/poll']);
+
+    if (sendSyncMsg) {
+        console.log(sendSyncMsg);
+        sendSyncMessage(polls, pollResponses, optionsList);
+        console.log('SYNC MSG Sent');
+        turnSyncOff();
+    }
 
     const renderContent = () => {
         switch (pollPaneMode) {

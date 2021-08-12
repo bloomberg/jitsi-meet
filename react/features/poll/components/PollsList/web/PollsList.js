@@ -43,7 +43,6 @@ export function PollsList() {
     const polls = useSelector(getPolls);
     const sorted = Object.values(polls).sort();
 
-    console.log(sorted);
     if (pollPaneMode !== 'PollsList') {
         return <div />;
     }
