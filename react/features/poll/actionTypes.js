@@ -24,5 +24,4 @@ export const PARTICIPANT_JOINED = 'PARTICIPANT_JOINED';
 
 export const SYNC_POLL = 'SYNC_POLL';
 
-export const SET_SYNC_FALSE = 'SET_SYNC_FALSE';
 

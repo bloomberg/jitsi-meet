@@ -1,6 +1,5 @@
 import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE,
     OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, CREATED_CUSTOMIZED_ANSWER,
-    SET_SYNC_FALSE,
     SYNC_POLL } from './actionTypes';
 
 /**
@@ -61,12 +60,6 @@ export const createdCustomizedAnswer = pollId => {
     return {
         type: CREATED_CUSTOMIZED_ANSWER,
         pollId
-    };
-};
-
-export const setSyncToFalse = () => {
-    return {
-        type: SET_SYNC_FALSE
     };
 };
 

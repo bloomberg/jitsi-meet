@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { isLocalParticipantModerator } from '../base/participants/functions';
 import { ReducerRegistry } from '../base/redux';
 
 import {
@@ -12,8 +11,6 @@ import {
     OPEN_POLL_DETAIL_PAGE,
     OPEN_POLLSLIST_PAGE,
     CREATED_CUSTOMIZED_ANSWER,
-    PARTICIPANT_JOINED,
-    SET_SYNC_FALSE,
     SYNC_POLL
 } from './actionTypes';
 import { REDUCER_KEY } from './constants';
@@ -25,8 +22,7 @@ const DEFAULT_STATE = {
     pollPaneMode: 'PollsList',
     pollSelected: {},
     createdCustomizedAnswer: {},
-    optionsList: {},
-    sendSyncMsg: false
+    optionsList: {}
 };
 
 
@@ -119,28 +115,13 @@ ReducerRegistry.register(
             createdCustomizedAnswer: { ...state.createdCustomizedAnswer,
                 [action.pollId]: false } }; }
 
-        case PARTICIPANT_JOINED: {
-            if (isLocalParticipantModerator) {
-                console.log('PARTICIPANT_JOINED');
-
-                return { ...state,
-                    sendSyncMsg: true };
-            }
-
-            return { ...state };
-        }
-
-        case SET_SYNC_FALSE: {
-            return { ...state,
-                sendSyncMsg: false };
-        }
-
         case SYNC_POLL: {
             return { ...state,
                 polls: action.polls,
                 pollResponses: action.pollResponses,
                 optionsList: action.optionsList };
         }
+
 
         default:
             return state;

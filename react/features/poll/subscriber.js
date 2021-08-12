@@ -4,6 +4,8 @@ import { StateListenerRegistry } from '../base/redux';
 import { NEW_POLL, NEW_POLL_RESPONSE, SYNC_POLL } from './actionTypes';
 import { newPoll, newPollResponse, syncPoll } from './actions';
 
+// OPtimization so that only sync once from the host when joining the conference
+let isSynced = false;
 
 StateListenerRegistry.register(
   state => getCurrentConference(state),
@@ -15,9 +17,13 @@ StateListenerRegistry.register(
               } else if (data.type === NEW_POLL_RESPONSE) {
                   store.dispatch(newPollResponse(data.response));
               } else if (data.type === SYNC_POLL) {
-                  const { polls, pollResponses, optionsList } = data;
+                  if (!isSynced) {
+                      const { polls, pollResponses, optionsList } = data;
 
-                  store.dispatch(syncPoll(polls, pollResponses, optionsList));
+                      store.dispatch(syncPoll(polls, pollResponses, optionsList));
+                      isSynced = true;
+                  }
+
               }
           });
       }
