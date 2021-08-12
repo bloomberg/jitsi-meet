@@ -1,5 +1,7 @@
 import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE,
-    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, CREATED_CUSTOMIZED_ANSWER } from './actionTypes';
+    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, CREATED_CUSTOMIZED_ANSWER,
+    SET_SYNC_FALSE,
+    SYNC_POLL } from './actionTypes';
 
 /**
  * Action to close the participants pane.
@@ -61,3 +63,19 @@ export const createdCustomizedAnswer = pollId => {
         pollId
     };
 };
+
+export const setSyncToFalse = () => {
+    return {
+        type: SET_SYNC_FALSE
+    };
+};
+
+export const syncPoll = (polls, pollResponses, optionsList) => {
+    return {
+        type: SYNC_POLL,
+        polls,
+        pollResponses,
+        optionsList
+    };
+};
+
