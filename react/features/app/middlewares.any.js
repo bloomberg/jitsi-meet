@@ -48,5 +48,5 @@ import '../video-layout/middleware';
 import '../video-quality/middleware';
 import '../videosipgw/middleware';
 import '../poll/subscriber';
-
+import '../poll/middleware';
 import './middleware';
