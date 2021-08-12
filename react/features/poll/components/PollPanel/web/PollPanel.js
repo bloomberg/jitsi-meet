@@ -54,9 +54,7 @@ const PollsPane = () => {
     const { polls, pollResponses, optionsList } = useSelector(state => state['features/poll']);
 
     if (sendSyncMsg) {
-        console.log(sendSyncMsg);
         sendSyncMessage(polls, pollResponses, optionsList);
-        console.log('SYNC MSG Sent');
         turnSyncOff();
     }
 
