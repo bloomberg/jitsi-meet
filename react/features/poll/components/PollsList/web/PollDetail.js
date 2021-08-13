@@ -40,7 +40,6 @@ export const PollDetail = () => {
             response: newResponse
         };
 
-        // console.log(conference);
         conference.sendMessage(msg);
     });
 
