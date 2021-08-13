@@ -5,6 +5,9 @@
  */
 export const NOTIFICATION_TIMEOUT = 2500;
 
+
+export const POLL_NOTIFICATION_TIMEOUT = 10000;
+
 /**
  * The set of possible notification types.
  *
