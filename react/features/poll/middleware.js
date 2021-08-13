@@ -17,7 +17,11 @@ MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
             console.log('PARTICIPANT_JOINED in middleware.js');
             const state = getState();
             const { polls, pollResponses, optionsList } = state['features/poll'];
+
+            // let { canAddCustomizedAnswer } = state['features/poll'];
             const conference = state['features/base/conference'].conference;
+
+
             const msg = { polls,
                 pollResponses,
                 optionsList,

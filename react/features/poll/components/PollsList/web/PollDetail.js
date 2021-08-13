@@ -25,11 +25,11 @@ export const PollDetail = () => {
     const { t } = useTranslation();
     const pollSelected = useSelector(state => state['features/poll'].pollSelected);
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
-    const removeCustomizedAnswer = useCallback(() => dispatch(disableCustomizedAnswer(pollSelected.pollId), [ dispatch ]));
+    const removeCustomizedAnswerBox = useCallback(() => dispatch(disableCustomizedAnswer(pollSelected.pollId), [ dispatch ]));
 
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);
-    const allowCustomizedInput = useSelector(state => state['features/poll'].canAddCustomizedAnswer[pollSelected.pollId]);
+    const createdCustomizedInput = useSelector(state => state['features/poll'].addedCustomizedAnswer[pollSelected.pollId]);
     const sendPollResponseMessage = useCallback(option => {
         const newResponse = { pollId: pollSelected.pollId,
             participantId: participant.id,
@@ -74,7 +74,7 @@ export const PollDetail = () => {
                         </div>
 
                     ))}
-                {pollSelected.allowCustomizedAnswer & allowCustomizedInput
+                {pollSelected.allowCustomizedAnswer & !createdCustomizedInput
                     ? <PollOptionsContainer>
                         <PollsContent>
                             <CustomizedAnswerInput
@@ -84,7 +84,7 @@ export const PollDetail = () => {
                                 onClick = { () => {
                                     if (customizedAnswer) {
                                         sendPollResponseMessage(customizedAnswer);
-                                        removeCustomizedAnswer();
+                                        removeCustomizedAnswerBox();
                                     }
                                 } }>+</AddOptionsButton>
                         </PollsContent>
