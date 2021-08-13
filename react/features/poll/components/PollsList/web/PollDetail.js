@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { NEW_POLL_RESPONSE } from '../../../actionTypes';
-import { openPollsListPage, createdCustomizedAnswer } from '../../../actions';
+import { openPollsListPage, disableCustomizedAnswer } from '../../../actions';
 import {
     PollOptionsContainer,
     PollsContent,
@@ -25,11 +25,11 @@ export const PollDetail = () => {
     const { t } = useTranslation();
     const pollSelected = useSelector(state => state['features/poll'].pollSelected);
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
-    const disableCustomizedAnswer = useCallback(() => dispatch(createdCustomizedAnswer(pollSelected.pollId), [ dispatch ]));
+    const removeCustomizedAnswer = useCallback(() => dispatch(disableCustomizedAnswer(pollSelected.pollId), [ dispatch ]));
 
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);
-    const allowCustomizedInput = useSelector(state => state['features/poll'].createdCustomizedAnswer[pollSelected.pollId]);
+    const allowCustomizedInput = useSelector(state => state['features/poll'].canAddCustomizedAnswer[pollSelected.pollId]);
     const sendPollResponseMessage = useCallback(option => {
         const newResponse = { pollId: pollSelected.pollId,
             participantId: participant.id,
@@ -84,7 +84,7 @@ export const PollDetail = () => {
                                 onClick = { () => {
                                     if (customizedAnswer) {
                                         sendPollResponseMessage(customizedAnswer);
-                                        disableCustomizedAnswer();
+                                        removeCustomizedAnswer();
                                     }
                                 } }>+</AddOptionsButton>
                         </PollsContent>

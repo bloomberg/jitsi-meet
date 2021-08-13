@@ -1,5 +1,5 @@
 import { POLLS_PANE_CLOSE, POLLS_PANE_OPEN, NEW_POLL, NEW_POLL_RESPONSE,
-    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, CREATED_CUSTOMIZED_ANSWER,
+    OPEN_POLL_CREATION_PAGE, OPEN_POLL_DETAIL_PAGE, OPEN_POLLSLIST_PAGE, DISABLE_CUSTOMIZED_ANSWER,
     SYNC_POLL } from './actionTypes';
 
 /**
@@ -56,9 +56,9 @@ export const openPollsListPage = () => {
     };
 };
 
-export const createdCustomizedAnswer = pollId => {
+export const disableCustomizedAnswer = pollId => {
     return {
-        type: CREATED_CUSTOMIZED_ANSWER,
+        type: DISABLE_CUSTOMIZED_ANSWER,
         pollId
     };
 };
