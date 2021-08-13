@@ -21,7 +21,7 @@ const DEFAULT_STATE = {
     pollResponses: {},
     pollPaneMode: 'PollsList',
     pollSelected: {},
-    canAddCustomizedAnswer: {},
+    addedCustomizedAnswer: {},
     optionsList: {}
 };
 
@@ -48,8 +48,9 @@ ReducerRegistry.register(
                 polls: { ...state.polls,
                     [action.poll.pollId]: action.poll
                 },
-                canAddCustomizedAnswer: { ...state.canAddCustomizedAnswer,
-                    [action.poll.pollId]: true },
+
+                // addedCustomizedAnswer: { ...state.addedCustomizedAnswer,
+                //     [action.poll.pollId]: true },
                 optionsList: { ...state.optionsList,
                     [action.poll.pollId]: Object.keys(action.poll.options) }
             };
@@ -112,8 +113,8 @@ ReducerRegistry.register(
             pollSelected: {} }; }
 
         case DISABLE_CUSTOMIZED_ANSWER: { return { ...state,
-            canAddCustomizedAnswer: { ...state.canAddCustomizedAnswer,
-                [action.pollId]: false } }; }
+            addedCustomizedAnswer: { ...state.addedCustomizedAnswer,
+                [action.pollId]: true } }; }
 
         case SYNC_POLL: {
             return { ...state,
