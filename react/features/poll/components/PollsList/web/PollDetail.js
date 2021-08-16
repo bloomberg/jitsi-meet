@@ -23,15 +23,17 @@ import { ProgressBar } from './ProgressBar';
 export const PollDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const pollSelected = useSelector(state => state['features/poll'].pollSelected);
+    const pollIdSelected = useSelector(state => state['features/poll'].pollSelected);
+    const pollSelected = useSelector(state => state['features/poll'].polls[pollIdSelected]);
+
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
-    const removeCustomizedAnswerBox = useCallback(() => dispatch(disableCustomizedAnswer(pollSelected.pollId), [ dispatch ]));
+    const removeCustomizedAnswerBox = useCallback(() => dispatch(disableCustomizedAnswer(pollIdSelected), [ dispatch ]));
 
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);
-    const createdCustomizedInput = useSelector(state => state['features/poll'].addedCustomizedAnswer[pollSelected.pollId]);
+    const createdCustomizedInput = useSelector(state => state['features/poll'].addedCustomizedAnswer[pollIdSelected]);
     const sendPollResponseMessage = useCallback(option => {
-        const newResponse = { pollId: pollSelected.pollId,
+        const newResponse = { pollId: pollIdSelected,
             participantId: participant.id,
             answer: [ option ] };
 
@@ -43,9 +45,9 @@ export const PollDetail = () => {
         conference.sendMessage(msg);
     });
 
-    const options = useSelector(state => state['features/poll'].optionsList[pollSelected.pollId]);
+    const options = useSelector(state => state['features/poll'].optionsList[pollIdSelected]);
 
-    const participantPollResponse = useSelector(state => _.get(state['features/poll'].pollResponses[pollSelected.pollId], participant.id));
+    const participantPollResponse = useSelector(state => _.get(state['features/poll'].pollResponses[pollIdSelected], participant.id));
     const participantAnswerList = _.get(participantPollResponse, 'answer') || [];
 
     const [ customizedAnswer, setCustomizedAnswer ] = useState('');

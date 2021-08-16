@@ -20,7 +20,7 @@ const DEFAULT_STATE = {
     polls: {},
     pollResponses: {},
     pollPaneMode: 'PollsList',
-    pollSelected: {},
+    pollSelected: '',
     addedCustomizedAnswer: {},
     optionsList: {}
 };
@@ -68,12 +68,7 @@ ReducerRegistry.register(
 
                 return;
             });
-            const optionsList = { ...state.optionsList };
 
-            if (!(action.response.answer[0] in state.polls[action.response.pollId].options)) {
-                optionsList[action.response.pollId].push(action.response.answer[0]);
-
-            }
             Object.values(pollResponses[action.response.pollId]).forEach(pollResponse => {
                 const vote = pollResponse.answer[0];
 
@@ -87,13 +82,21 @@ ReducerRegistry.register(
                 return;
             });
 
+            const optionsList = { ...state.optionsList };
+
+            if (!(action.response.answer[0] in state.polls[action.response.pollId].options)) {
+                optionsList[action.response.pollId].push(action.response.answer[0]);
+
+            }
+
             return { ...state,
                 pollResponses,
                 polls: { ...state.polls,
                     [action.response.pollId]: { ...state.polls[action.response.pollId],
                         options } },
-                pollSelected: { ...state.pollSelected,
-                    options },
+
+                // pollSelected: { ...state.pollSelected,
+                //     options },
                 optionsList
             };
 
@@ -106,11 +109,11 @@ ReducerRegistry.register(
 
         case OPEN_POLL_DETAIL_PAGE: { return { ...state,
             pollPaneMode: 'PollDetail',
-            pollSelected: action.poll }; }
+            pollSelected: action.poll.pollId }; }
 
         case OPEN_POLLSLIST_PAGE: { return { ...state,
             pollPaneMode: 'PollsList',
-            pollSelected: {} }; }
+            pollSelected: '' }; }
 
         case DISABLE_CUSTOMIZED_ANSWER: { return { ...state,
             addedCustomizedAnswer: { ...state.addedCustomizedAnswer,
