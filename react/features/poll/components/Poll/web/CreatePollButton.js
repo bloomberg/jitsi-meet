@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { openPollCreationPage } from '../../../actions';
 import {
     PollCreateButton
-} from '../../PollPanel/styled';
+} from '../../../styled';
 
 /**
  * CreatePollButton component.

@@ -9,7 +9,7 @@ import {
     PollsContent,
     PollsTitle,
     PollsTitleContainer
-} from '../../PollPanel/styled';
+} from '../../../styled';
 type Props = {
 
     /**

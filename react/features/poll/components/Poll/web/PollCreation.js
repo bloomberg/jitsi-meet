@@ -1,13 +1,11 @@
 // @flow
 import React, { useCallback } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 import { NEW_POLL } from '../../../actionTypes';
 import { openPollsListPage } from '../../../actions';
-import theme from '../../../theme.json';
 import {
     Button,
     FooterButton,
@@ -18,16 +16,11 @@ import {
     Option,
     AddOptionsButton,
     Heading
-} from '../../PollPanel/styled';
-type Props = {
-
-    poll: Object
-};
-
+} from '../../../styled';
+import theme from '../../../theme.json';
 
 export const PollCreation = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation();
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
     const conference = useSelector(state => state['features/base/conference'].conference);
     const participant = useSelector(state => state['features/base/participants'].local);

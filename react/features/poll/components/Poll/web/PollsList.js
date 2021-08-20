@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import { withPixelLineHeight } from '../../../../base/styles/functions.web';
 import { getPolls } from '../../../functions';
-import { Heading } from '../../PollPanel/styled';
+import { Heading } from '../../../styled';
 
 import { CreatePollButton } from './CreatePollButton';
 import { PollsListItem } from './PollsListItem';

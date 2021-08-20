@@ -5,19 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
+import { PollsList, PollCreation, PollDetail } from '..';
 import { close } from '../../../actions';
 import { classList, getPollsPaneOpen } from '../../../functions';
-import theme from '../../../theme.json';
-import { PollsList, PollCreation, PollDetail } from '../../PollsList/';
 import {
     Close,
     Container,
     Footer,
     Header
-} from '../styled';
+} from '../../../styled';
+import theme from '../../../theme.json';
 
 
-const PollsPane = () => {
+export const PollPanel = () => {
     const dispatch = useDispatch();
     const paneOpen = useSelector(getPollsPaneOpen);
     const { t } = useTranslation();
@@ -68,5 +68,3 @@ const PollsPane = () => {
 
     );
 };
-
-export default PollsPane;

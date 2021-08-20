@@ -18,8 +18,13 @@ import { KnockingParticipantList, LobbyScreen } from '../../../lobby';
 import { getIsLobbyVisible } from '../../../lobby/functions';
 import { ParticipantsPane } from '../../../participants-pane/components/web';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+<<<<<<< HEAD
 import { PollsPane } from '../../../poll/components';
 import { Prejoin, isPrejoinPageVisible, isPrejoinPageLoading } from '../../../prejoin';
+=======
+import { PollPanel } from '../../../poll';
+import { Prejoin, isPrejoinPageVisible } from '../../../prejoin';
+>>>>>>> Code clean up
 import { fullScreenChanged, showToolbox } from '../../../toolbox/actions.web';
 import { Toolbox } from '../../../toolbox/components/web';
 import { LAYOUTS, getCurrentLayout } from '../../../video-layout';
@@ -250,7 +255,7 @@ class Conference extends AbstractConference<Props, *> {
                     { _showLobby && <LobbyScreen />}
                 </div>
                 <ParticipantsPane />
-                <PollsPane />
+                <PollPanel />
             </div>
         );
     }

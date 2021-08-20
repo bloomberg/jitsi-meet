@@ -16,7 +16,7 @@ import {
     Heading,
     CustomizedAnswerInput,
     AddOptionsButton
-} from '../../PollPanel/styled';
+} from '../../../styled';
 
 import { ProgressBar } from './ProgressBar';
 
