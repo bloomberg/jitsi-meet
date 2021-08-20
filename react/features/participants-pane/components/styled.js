@@ -344,4 +344,3 @@ export const VolumeOverlay = styled.div`
   pointer-events: none;
   position: absolute;
 `;
-
