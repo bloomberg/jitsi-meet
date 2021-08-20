@@ -66,11 +66,11 @@ ReducerRegistry.register('features/base/config', (state = _getInitialState(), ac
             error: undefined,
 
             /**
-                    * The URL of the location associated with/configured by this
-                    * configuration.
-                    *
-                    * @type URL
-                    */
+                * The URL of the location associated with/configured by this
+                * configuration.
+                *
+                * @type URL
+                */
             locationURL: action.locationURL
         };
 
@@ -84,11 +84,11 @@ ReducerRegistry.register('features/base/config', (state = _getInitialState(), ac
         if (state.locationURL === action.locationURL) {
             return {
                 /**
-                        * The {@link Error} which prevented the loading of the
-                        * configuration of the associated {@code locationURL}.
-                        *
-                        * @type Error
-                        */
+                    * The {@link Error} which prevented the loading of the
+                    * configuration of the associated {@code locationURL}.
+                    *
+                    * @type Error
+                    */
                 error: action.error
             };
         }
@@ -190,7 +190,7 @@ function _translateLegacyConfig(oldValue: Object) {
     const newValue = oldValue;
 
     if (!Array.isArray(oldValue.toolbarButtons)
-        && typeof interfaceConfig === 'object' && Array.isArray(interfaceConfig.TOOLBAR_BUTTONS)) {
+            && typeof interfaceConfig === 'object' && Array.isArray(interfaceConfig.TOOLBAR_BUTTONS)) {
         newValue.toolbarButtons = interfaceConfig.TOOLBAR_BUTTONS;
     }
 

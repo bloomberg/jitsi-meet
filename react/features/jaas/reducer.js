@@ -24,5 +24,5 @@ ReducerRegistry.register(
         default:
             return state;
         }
-    }
+    },
 );

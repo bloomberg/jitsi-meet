@@ -372,7 +372,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         }
 
         return ALWAYS_ON_TOP_FILENAMES.map(
-            filename => new URL(filename, baseURL).href
+            filename => (new URL(filename, baseURL)).href
         );
     }
 
