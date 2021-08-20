@@ -49,8 +49,6 @@ ReducerRegistry.register(
                     [action.poll.pollId]: action.poll
                 },
 
-                // addedCustomizedAnswer: { ...state.addedCustomizedAnswer,
-                //     [action.poll.pollId]: true },
                 optionsList: { ...state.optionsList,
                     [action.poll.pollId]: Object.keys(action.poll.options) }
             };
@@ -95,8 +93,6 @@ ReducerRegistry.register(
                     [action.response.pollId]: { ...state.polls[action.response.pollId],
                         options } },
 
-                // pollSelected: { ...state.pollSelected,
-                //     options },
                 optionsList
             };
 
