@@ -229,5 +229,5 @@ function mapDispatchToProps(dispatch) {
 
 export default translate(connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(ReactionsMenu));
