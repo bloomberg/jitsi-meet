@@ -1,7 +1,7 @@
 
 import styled from 'styled-components';
 
-import { ActionTrigger } from '../../constants';
+import { ActionTrigger } from './constants';
 
 export const ignoredChildClassName = 'ignore-child';
 

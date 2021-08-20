@@ -1,9 +1,10 @@
 // @flow
 
+import { PARTICIPANT_JOINED } from '../base/participants/actionTypes';
 import { isLocalParticipantModerator } from '../base/participants/functions';
 import { MiddlewareRegistry } from '../base/redux';
 
-import { PARTICIPANT_JOINED, SYNC_POLL } from './actionTypes';
+import { SYNC_POLL } from './actionTypes';
 
 
 MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
@@ -14,7 +15,6 @@ MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
     // Middleware triggered when a poll is received
     case PARTICIPANT_JOINED: {
         if (isLocalParticipantModerator) {
-            console.log('PARTICIPANT_JOINED in middleware.js');
             const state = getState();
             const { polls, pollResponses, optionsList } = state['features/poll'];
 

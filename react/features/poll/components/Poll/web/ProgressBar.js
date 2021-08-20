@@ -7,7 +7,7 @@ import {
     ProgressBarConatainer,
     ProgressCount,
     ProgressText
-} from '../../PollPanel/styled';
+} from '../../../styled';
 
 
 export const ProgressBar = props => {
