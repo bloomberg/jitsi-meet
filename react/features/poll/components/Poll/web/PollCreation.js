@@ -73,11 +73,11 @@ export const PollCreation = () => {
                         {fields.map((item, index) => (
                             <Option key = { item.id }>
                                 <input
+                                    placeholder = 'Option...'
                                     styles = {{ display: 'block',
                                         boxSizing: 'border-box',
                                         borderRadius: '2px',
                                         border: '1px solid white' }}
-                                    placeholder = 'Option...'
                                     { ...register(`options.${index}.option`, { required: true }) } />
                                 <Button
                                     onClick = { () => remove(index) }

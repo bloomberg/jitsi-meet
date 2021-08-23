@@ -64,8 +64,8 @@ export const PollDetail = () => {
                         <div key = { option }>
                             <PollOptionsContainer>
                                 <PollsContent
-                                    onClick = { () => sendPollResponseMessage(option) }
-                                    isSelected = { participantAnswerList.includes(option) }>
+                                    isSelected = { participantAnswerList.includes(option) }
+                                    onClick = { () => sendPollResponseMessage(option) }>
                                     <ProgressBar
                                         count = { pollSelected.options[option] }
                                         percentage = {
