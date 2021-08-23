@@ -68,15 +68,15 @@ export const PollDetail = () => {
                                     isSelected = { participantAnswerList.includes(option) }>
                                     <ProgressBar
                                         count = { pollSelected.options[option] }
-                                        text = { option }
-                                        percentage = { Math.floor((pollSelected.options[option] * 100) / totalVotes) || 0 } />
+                                        percentage = { Math.floor((pollSelected.options[option] * 100) / totalVotes) || 0 }
+                                        text = { option } />
                                 </PollsContent>
                             </PollOptionsContainer>
 
                         </div>
 
                     ))}
-                {pollSelected.allowCustomizedAnswer & !createdCustomizedInput
+                {pollSelected.allowCustomizedAnswer && !createdCustomizedInput
                     ? <PollOptionsContainer>
                         <PollsContent>
                             <CustomizedAnswerInput
