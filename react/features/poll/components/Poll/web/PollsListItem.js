@@ -22,7 +22,7 @@ type Props = {
 export const PollsListItem = ({ poll: p }: Props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const toggleDetailView = p => {
+    const toggleDetailView = () => {
         dispatch(openPollDetailPage(p), [ dispatch ]);
     };
 

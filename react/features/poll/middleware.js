@@ -7,7 +7,7 @@ import { MiddlewareRegistry } from '../base/redux';
 import { SYNC_POLL } from './actionTypes';
 
 
-MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
+MiddlewareRegistry.register(({ getState }) => next => action => {
     const result = next(action);
 
     switch (action.type) {
@@ -18,9 +18,7 @@ MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
             const state = getState();
             const { polls, pollResponses, optionsList } = state['features/poll'];
 
-            // let { canAddCustomizedAnswer } = state['features/poll'];
             const conference = state['features/base/conference'].conference;
-
 
             const msg = { polls,
                 pollResponses,
