@@ -7,15 +7,15 @@ import { ThemeProvider } from 'styled-components';
 import { NEW_POLL } from '../../../actionTypes';
 import { openPollsListPage } from '../../../actions';
 import {
-    Button,
-    FooterButton,
-    TitleInput,
+    AddOptionsButton,
     AddOptionsContainer,
+    Button,
     Container,
     Footer,
+    FooterButton,
+    Heading,
     Option,
-    AddOptionsButton,
-    Heading
+    TitleInput
 } from '../../../styled';
 import theme from '../../../theme.json';
 
@@ -39,7 +39,7 @@ export const PollCreation = () => {
 
         const time = Date.now().toString();
         const poll = { creatorParticipantId: participant.id,
-            pollId: `${time}_${Math.floor(Math.random() * 899999 + 100000).toString()}`,
+            pollId: `${time}_${Math.floor((Math.random() * 899999) + 100000).toString()}`,
             title: data.title,
             allowCustomizedAnswer: data.customizedAnswer,
             options };

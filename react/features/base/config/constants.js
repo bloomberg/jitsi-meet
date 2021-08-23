@@ -32,6 +32,7 @@ export const TOOLBAR_BUTTONS = [
     'mute-everyone',
     'mute-video-everyone',
     'participants-pane',
+    'poll',
     'profile',
     'raisehand',
     'recording',
@@ -44,6 +45,5 @@ export const TOOLBAR_BUTTONS = [
     'stats',
     'tileview',
     'toggle-camera',
-    'videoquality',
-    'poll'
+    'videoquality'
 ];
