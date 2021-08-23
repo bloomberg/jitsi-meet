@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 
 import {
@@ -9,8 +11,25 @@ import {
     ProgressText
 } from '../../../styled';
 
+type Props = {
 
-export const ProgressBar = props => {
+    /**
+     * True if the button needs to be disabled.
+     */
+     text: String,
+
+    /**
+     * Whether video is currently muted or not.
+     */
+     percentage: String,
+
+    /**
+     * The redux {@code dispatch} function.
+     */
+     count: String
+};
+
+export const ProgressBar = (props: Props) => {
     const { text, percentage, count } = props;
 
     return (

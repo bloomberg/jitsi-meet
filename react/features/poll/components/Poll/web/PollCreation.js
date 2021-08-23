@@ -59,6 +59,10 @@ export const PollCreation = () => {
         }
     );
 
+    const handleAddOptionsButton = useCallback(() => append({ option: '' }));
+
+    const handleRemoveOptionsButton = useCallback(index => () => remove(index));
+
     return (
         <ThemeProvider theme = { theme }>
 
@@ -80,15 +84,13 @@ export const PollCreation = () => {
                                         border: '1px solid white' }}
                                     { ...register(`options.${index}.option`, { required: true }) } />
                                 <Button
-                                    onClick = { () => remove(index) }
+                                    onClick = { handleRemoveOptionsButton(index) }
                                     type = 'button'> x
                                 </Button>
                             </Option>
                         ))}
                         <AddOptionsButton
-                            onClick = { () => {
-                                append({ option: '' });
-                            } }
+                            onClick = { handleAddOptionsButton }
                             type = 'button'>
                         +
                         </AddOptionsButton>

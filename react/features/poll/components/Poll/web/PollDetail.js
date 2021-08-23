@@ -55,6 +55,20 @@ export const PollDetail = () => {
 
     const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + count, 0);
 
+    const handleSetCustomizedAnswer = useCallback(e => {
+        setCustomizedAnswer(e.target.value);
+    });
+
+    const handleAddCustomizedOptionButton = useCallback(() => {
+        if (customizedAnswer) {
+            console.log(customizedAnswer);
+            sendPollResponseMessage(customizedAnswer);
+            removeCustomizedAnswerBox();
+        }
+    });
+
+    const handlePollResponse = useCallback(option => () => sendPollResponseMessage(option));
+
     return (<div>
         <Header><Heading>{pollSelected.title}</Heading></Header>
         <Container>
@@ -65,7 +79,7 @@ export const PollDetail = () => {
                             <PollOptionsContainer>
                                 <PollsContent
                                     isSelected = { participantAnswerList.includes(option) }
-                                    onClick = { () => sendPollResponseMessage(option) }>
+                                    onClick = { handlePollResponse(option) }>
                                     <ProgressBar
                                         count = { pollSelected.options[option] }
                                         percentage = {
@@ -82,15 +96,10 @@ export const PollDetail = () => {
                     ? <PollOptionsContainer>
                         <PollsContent>
                             <CustomizedAnswerInput
-                                onChange = { e => setCustomizedAnswer(e.target.value) }
+                                onChange = { handleSetCustomizedAnswer }
                                 placeholder = 'Other ...' />
                             <AddOptionsButton
-                                onClick = { () => {
-                                    if (customizedAnswer) {
-                                        sendPollResponseMessage(customizedAnswer);
-                                        removeCustomizedAnswerBox();
-                                    }
-                                } }>+</AddOptionsButton>
+                                onClick = { handleAddCustomizedOptionButton }>+</AddOptionsButton>
                         </PollsContent>
                     </PollOptionsContainer>
                     : <div />}
