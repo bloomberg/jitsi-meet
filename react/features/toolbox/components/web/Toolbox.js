@@ -39,28 +39,14 @@ import {
 import ParticipantsPaneButton from '../../../participants-pane/components/ParticipantsPaneButton';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
 import { PollButton } from '../../../poll';
-<<<<<<< HEAD
 import { addReactionToBuffer } from '../../../reactions/actions.any';
-=======
->>>>>>> fixing some styling issues
 import { ReactionsMenuButton } from '../../../reactions/components';
 import { REACTIONS } from '../../../reactions/constants';
 import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { isScreenAudioShared, isScreenAudioSupported,
-=======
-
-import { PollButton } from '../../../poll'
-
-=======
->>>>>>> fixing some styling issues
-import {
->>>>>>> adapt to latest jitsi-meet changes
-    isScreenAudioSupported,
+import { isScreenAudioSupported,
     isScreenVideoShared,
     ShareAudioButton,
     startScreenShareFlow
@@ -414,10 +400,9 @@ class Toolbox extends Component<Props> {
      * @returns {ReactElement}
      */
     render() {
-        const { _chatOpen, _visible, _visibleButtons } = this.props;
-        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} 
-        ${_visibleButtons.length ? '' : 'no-buttons'} 
-        ${_chatOpen ? 'shift-right' : ''}`;
+        const { _chatOpen, _visible, _toolbarButtons } = this.props;
+        const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${
+            _toolbarButtons.length ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
 
         return (
             <div
@@ -694,21 +679,12 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
-<<<<<<< HEAD
-=======
-        const livestreaming = {
-            key: 'livestreaming',
-            Content: LiveStreamButton,
-            group: 2
-        };
-
         const poll = {
             key: 'poll',
             Content: PollButton,
             group: 2
         };
 
->>>>>>> adapt to latest jitsi-meet changes
         const shareVideo = {
             key: 'sharedvideo',
             Content: SharedVideoButton,
@@ -775,7 +751,6 @@ class Toolbox extends Component<Props> {
             group: 4
         };
 
-
         return {
             microphone,
             camera,
@@ -796,11 +771,7 @@ class Toolbox extends Component<Props> {
             livestreaming,
             muteEveryone,
             muteVideoEveryone,
-<<<<<<< HEAD
-=======
-            livestreaming,
             poll,
->>>>>>> adapt to latest jitsi-meet changes
             shareVideo,
             shareAudio,
             etherpad,
@@ -812,7 +783,6 @@ class Toolbox extends Component<Props> {
             feedback,
             download,
             help
-
         };
     }
 
@@ -827,6 +797,7 @@ class Toolbox extends Component<Props> {
             _clientWidth,
             _toolbarButtons
         } = this.props;
+
 
         const buttons = this._getAllButtons();
         const isHangupVisible = isToolbarButtonEnabled('hangup', _toolbarButtons);
@@ -1222,16 +1193,11 @@ class Toolbox extends Component<Props> {
                 <div
                     className = 'toolbox-content-wrapper'
                     onFocus = { this._onTabIn }
-<<<<<<< HEAD
                     { ...(_isMobile ? {} : {
                         onMouseOut: this._onMouseOut,
                         onMouseOver: this._onMouseOver
                     }) }>
                     <DominantSpeakerName />
-=======
-                    onMouseOut = { this._onMouseOut }
-                    onMouseOver = { this._onMouseOver }>
->>>>>>> fixing some styling issues
                     <div className = 'toolbox-content-items'>
                         {mainMenuButtons.map(({ Content, key, ...rest }) => Content !== Separator && (
                             <Content
@@ -1245,11 +1211,7 @@ class Toolbox extends Component<Props> {
                                 key = 'overflow-menu'
                                 onVisibilityChange = { this._onSetOverflowVisible }
                                 showMobileReactions = {
-<<<<<<< HEAD
                                     _reactionsEnabled && overflowMenuButtons.find(({ key }) => key === 'raisehand')
-=======
-                                    overflowMenuButtons.find(({ key }) => key === 'raisehand')
->>>>>>> fixing some styling issues
                                 }>
                                 <ul
                                     aria-label = { t(toolbarAccLabel) }
@@ -1272,6 +1234,7 @@ class Toolbox extends Component<Props> {
                                     })}
 
                                 </ul>
+                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 
