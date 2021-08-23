@@ -1234,7 +1234,6 @@ class Toolbox extends Component<Props> {
                                     })}
 
                                 </ul>
-                                {/* <PollButton /> */}
                             </OverflowMenuButton>
                         )}
 
