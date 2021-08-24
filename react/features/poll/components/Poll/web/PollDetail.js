@@ -53,7 +53,7 @@ export const PollDetail = () => {
 
     const [ customizedAnswer, setCustomizedAnswer ] = useState('');
 
-    const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + count, 0);
+    const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + parseInt(count, 10), 0);
 
     const handleSetCustomizedAnswer = useCallback(e => {
         setCustomizedAnswer(e.target.value);

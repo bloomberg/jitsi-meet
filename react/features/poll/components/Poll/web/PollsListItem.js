@@ -19,20 +19,20 @@ type Props = {
 };
 
 
-export const PollsListItem = ({ poll: p }: Props) => {
+export const PollsListItem = ({ poll }: Props) => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const toggleDetailView = () => {
-        dispatch(openPollDetailPage(p), [ dispatch ]);
+        dispatch(openPollDetailPage(poll), [ dispatch ]);
     };
 
-    const handleToggleDetailView = useCallback(() => toggleDetailView(p));
+    const handleToggleDetailView = useCallback(() => toggleDetailView());
 
     return (<PollsContainer>
         <PollsContent onClick = { handleToggleDetailView }>
             <PollsTitleContainer>
                 <PollsTitle>
-                    { t(p.title) }
+                    { t(poll.title) }
                 </PollsTitle>
             </PollsTitleContainer>
         </PollsContent>

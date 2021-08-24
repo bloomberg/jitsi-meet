@@ -1,21 +1,27 @@
 // @flow
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 
 import { translate } from '../../../../base/i18n';
 import { PollIcon } from '../../../../base/icons';
 import { connect } from '../../../../base/redux';
-import { AbstractButton } from '../../../../base/toolbox/components';
+import {
+    AbstractButton,
+    type AbstractButtonProps
+} from '../../../../base/toolbox/components';
 import {
     close as closePollsPane,
     open as openPollsPane
 } from '../../../actions';
+
 
 type Props = AbstractButtonProps & {
 
   /**
    * The redux {@code dispatch} function.
    */
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+
+  isOpen: Boolean
 };
 
 /**

@@ -18,7 +18,7 @@ export function PollsList() {
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const { t } = useTranslation();
     const polls = useSelector(getPolls);
-    const sorted = Object.values(polls).sort();
+    const sorted: Array<Object> = Object.values(polls).sort();
 
     if (pollPaneMode !== 'PollsList') {
         return <div />;
@@ -32,7 +32,7 @@ export function PollsList() {
             <CreatePollButton />
             <div>
                 {sorted.map(p => (<PollsListItem
-                    key = { p.id }
+                    key = { p.pollId }
                     poll = { p } />))}
             </div>
         </>

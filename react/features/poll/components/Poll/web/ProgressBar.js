@@ -21,12 +21,12 @@ type Props = {
     /**
      * Whether video is currently muted or not.
      */
-     percentage: String,
+     percentage: number,
 
     /**
      * The redux {@code dispatch} function.
      */
-     count: String
+     count: number
 };
 
 export const ProgressBar = (props: Props) => {
@@ -39,7 +39,7 @@ export const ProgressBar = (props: Props) => {
                 <ProgressCount>{count}</ProgressCount>
             </Progress>
             <ProgressBarComplete
-                style = {{ width: `${percentage}%` }}>
+                style = {{ width: `${percentage.toString()}%` }}>
                 <ProgressBarLiquid />
             </ProgressBarComplete>
 
