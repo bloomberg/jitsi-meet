@@ -19,6 +19,8 @@ import {
 } from '../../../styled';
 import theme from '../../../theme.json';
 
+import '../../../reactHookFormStyles.css';
+
 export const PollCreation = () => {
     const dispatch = useDispatch();
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
@@ -77,11 +79,8 @@ export const PollCreation = () => {
                         {fields.map((item, index) => (
                             <Option key = { item.id }>
                                 <input
+                                    className = 'optionInput'
                                     placeholder = 'Option...'
-                                    styles = {{ display: 'block',
-                                        boxSizing: 'border-box',
-                                        borderRadius: '2px',
-                                        border: '1px solid white' }}
                                     { ...register(`options.${index}.option`, { required: true }) } />
                                 <Button
                                     onClick = { handleRemoveOptionsButton(index) }
