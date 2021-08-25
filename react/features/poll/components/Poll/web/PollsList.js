@@ -15,7 +15,6 @@ import { PollsListItem } from './PollsListItem';
  * @returns {any} Arg.
  */
 export function PollsList() {
-    const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
     const { t } = useTranslation();
     const polls = useSelector(getPolls);
     const sorted: Array<Object> = Object.values(polls).sort();
