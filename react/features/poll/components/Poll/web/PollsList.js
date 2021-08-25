@@ -20,10 +20,6 @@ export function PollsList() {
     const polls = useSelector(getPolls);
     const sorted: Array<Object> = Object.values(polls).sort();
 
-    if (pollPaneMode !== 'PollsList') {
-        return <div />;
-    }
-
     return (
         <>
             <Heading>
