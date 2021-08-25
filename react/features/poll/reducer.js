@@ -76,7 +76,6 @@ ReducerRegistry.register(
                     options[vote] = 1;
                 }
 
-
                 return;
             });
 
@@ -84,7 +83,6 @@ ReducerRegistry.register(
 
             if (!(action.response.answer[0] in state.polls[action.response.pollId].options)) {
                 optionsList[action.response.pollId].push(action.response.answer[0]);
-
             }
 
             return { ...state,
@@ -95,7 +93,6 @@ ReducerRegistry.register(
 
                 optionsList
             };
-
         }
 
         case OPEN_POLL_CREATION_PAGE: {
@@ -121,7 +118,6 @@ ReducerRegistry.register(
                 pollResponses: action.pollResponses,
                 optionsList: action.optionsList };
         }
-
 
         default:
             return state;

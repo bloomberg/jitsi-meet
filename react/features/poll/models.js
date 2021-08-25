@@ -30,14 +30,13 @@ export type Poll = {
   title: String,
 
   /**
-   * Title of the Poll
+   * Options of the Poll
    */
   options: Map<String, Array<String>>,
 
+  /**
+   * Whether customized answer is allowed
+   */
   allowCustomizedAnswer: Boolean,
 
-  /**
-   * An array of boolean: true if the answer was chosen by the responder, else false
-   */
-  // votes: Array<PollResponse>
 };
