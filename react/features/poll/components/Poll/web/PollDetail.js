@@ -21,16 +21,21 @@ import { ProgressBar } from './ProgressBar';
 
 export const PollDetail = () => {
     const dispatch = useDispatch();
+
+    const [ customizedAnswer, setCustomizedAnswer ] = useState('');
+
     const pollIdSelected = useSelector(state => state['features/poll'].pollSelected);
     const pollSelected = useSelector(state => state['features/poll'].polls[pollIdSelected]);
+    const conference = useSelector(state => state['features/base/conference'].conference);
+    const participant = useSelector(state => state['features/base/participants'].local);
+    const createdCustomizedInput = useSelector(state => state['features/poll'].addedCustomizedAnswer[pollIdSelected]);
+    const options = useSelector(state => state['features/poll'].optionsList[pollIdSelected]);
+    const participantPollResponse = useSelector(state =>
+        _.get(state['features/poll'].pollResponses[pollIdSelected], participant.id));
 
     const togglePollsListMode = useCallback(() => dispatch(openPollsListPage(), [ dispatch ]));
     const removeCustomizedAnswerBox = useCallback(() =>
         dispatch(disableCustomizedAnswer(pollIdSelected), [ dispatch ]));
-
-    const conference = useSelector(state => state['features/base/conference'].conference);
-    const participant = useSelector(state => state['features/base/participants'].local);
-    const createdCustomizedInput = useSelector(state => state['features/poll'].addedCustomizedAnswer[pollIdSelected]);
     const sendPollResponseMessage = useCallback(option => {
         const newResponse = { pollId: pollIdSelected,
             participantId: participant.id,
@@ -43,31 +48,23 @@ export const PollDetail = () => {
 
         conference.sendMessage(msg);
     });
-
-    const options = useSelector(state => state['features/poll'].optionsList[pollIdSelected]);
-
-    const participantPollResponse = useSelector(state =>
-        _.get(state['features/poll'].pollResponses[pollIdSelected], participant.id));
-
-    const participantAnswerList = _.get(participantPollResponse, 'answer') || [];
-
-    const [ customizedAnswer, setCustomizedAnswer ] = useState('');
-
-    const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + parseInt(count, 10), 0);
-
     const handleSetCustomizedAnswer = useCallback(e => {
         setCustomizedAnswer(e.target.value);
     });
 
     const handleAddCustomizedOptionButton = useCallback(() => {
         if (customizedAnswer) {
-            console.log(customizedAnswer);
             sendPollResponseMessage(customizedAnswer);
             removeCustomizedAnswerBox();
         }
     });
 
     const handlePollResponse = useCallback(option => () => sendPollResponseMessage(option));
+
+    const participantAnswerList = _.get(participantPollResponse, 'answer') || [];
+
+    const totalVotes = Object.values(pollSelected.options).reduce((total, count) => total + parseInt(count, 10), 0);
+
 
     return (<div>
         <Header><Heading>{pollSelected.title}</Heading></Header>
@@ -93,7 +90,7 @@ export const PollDetail = () => {
 
                     ))}
                 {pollSelected.allowCustomizedAnswer && !createdCustomizedInput
-                    ? <PollOptionsContainer>
+                    && <PollOptionsContainer>
                         <PollsContent>
                             <CustomizedAnswerInput
                                 onChange = { handleSetCustomizedAnswer }
@@ -102,7 +99,7 @@ export const PollDetail = () => {
                                 onClick = { handleAddCustomizedOptionButton }>+</AddOptionsButton>
                         </PollsContent>
                     </PollOptionsContainer>
-                    : <div />}
+                }
             </div>
         </Container>
         <Footer>
