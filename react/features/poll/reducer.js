@@ -22,6 +22,9 @@ const DEFAULT_STATE = {
     pollPaneMode: 'PollsList',
     pollSelected: '',
     addedCustomizedAnswer: {},
+
+    // To keep track of the order in which options are added to the poll.
+    // In order to display options in timed order
     optionsList: {}
 };
 
@@ -80,9 +83,10 @@ ReducerRegistry.register(
             });
 
             const optionsList = { ...state.optionsList };
+            const answer = action.response.answer[0];
 
-            if (!(action.response.answer[0] in state.polls[pollId].options)) {
-                optionsList[pollId].push(action.response.answer[0]);
+            if (!(answer in state.polls[pollId].options)) {
+                optionsList[pollId].push(answer);
             }
 
             return { ...state,
