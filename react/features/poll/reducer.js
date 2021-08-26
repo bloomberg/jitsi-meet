@@ -54,19 +54,20 @@ ReducerRegistry.register(
         }
 
         case NEW_POLL_RESPONSE: {
-            const oldResponse = _.get(state.pollResponses, action.response.pollId);
+            const pollId = action.response.pollId;
+            const oldResponse = _.get(state.pollResponses, pollId);
             const pollResponses = { ...state.pollResponses,
-                [action.response.pollId]: { ...oldResponse,
+                [pollId]: { ...oldResponse,
                     [action.response.participantId]: action.response } };
             const options = {};
 
-            Object.keys(state.polls[action.response.pollId].options).forEach(option => {
+            Object.keys(state.polls[pollId].options).forEach(option => {
                 options[option] = 0;
 
                 return;
             });
 
-            Object.values(pollResponses[action.response.pollId]).forEach(pollResponse => {
+            Object.values(pollResponses[pollId]).forEach(pollResponse => {
                 const vote = pollResponse.answer[0];
 
                 if (options[vote]) {
@@ -80,14 +81,14 @@ ReducerRegistry.register(
 
             const optionsList = { ...state.optionsList };
 
-            if (!(action.response.answer[0] in state.polls[action.response.pollId].options)) {
-                optionsList[action.response.pollId].push(action.response.answer[0]);
+            if (!(action.response.answer[0] in state.polls[pollId].options)) {
+                optionsList[pollId].push(action.response.answer[0]);
             }
 
             return { ...state,
                 pollResponses,
                 polls: { ...state.polls,
-                    [action.response.pollId]: { ...state.polls[action.response.pollId],
+                    [pollId]: { ...state.polls[pollId],
                         options } },
 
                 optionsList

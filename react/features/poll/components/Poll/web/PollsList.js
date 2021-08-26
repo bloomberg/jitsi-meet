@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { getPolls } from '../../../functions';
@@ -15,14 +14,13 @@ import { PollsListItem } from './PollsListItem';
  * @returns {any} Arg.
  */
 export function PollsList() {
-    const { t } = useTranslation();
     const polls = useSelector(getPolls);
     const sorted: Array<Object> = Object.values(polls).sort();
 
     return (
         <>
             <Heading>
-                {t('Polls')}
+                Polls
             </Heading>
             <CreatePollButton />
             <div>

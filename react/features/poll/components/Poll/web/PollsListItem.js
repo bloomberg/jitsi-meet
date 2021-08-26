@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { openPollDetailPage } from '../../../actions';
@@ -21,7 +20,6 @@ type Props = {
 
 export const PollsListItem = ({ poll }: Props) => {
     const dispatch = useDispatch();
-    const { t } = useTranslation();
     const toggleDetailView = () => {
         dispatch(openPollDetailPage(poll), [ dispatch ]);
     };
@@ -32,7 +30,7 @@ export const PollsListItem = ({ poll }: Props) => {
         <PollsContent onClick = { handleToggleDetailView }>
             <PollsTitleContainer>
                 <PollsTitle>
-                    { t(poll.title) }
+                    {poll.title}
                 </PollsTitle>
             </PollsTitleContainer>
         </PollsContent>
