@@ -1,7 +1,6 @@
 // @flow
 
 import React, { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
@@ -20,7 +19,6 @@ import theme from '../../../theme.json';
 export const PollPanel = () => {
     const dispatch = useDispatch();
     const paneOpen = useSelector(getPollsPaneOpen);
-    const { t } = useTranslation();
 
     const closePane = useCallback(() => dispatch(close(), [ dispatch ]));
     const pollPaneMode = useSelector(state => state['features/poll'].pollPaneMode);
@@ -52,7 +50,6 @@ export const PollPanel = () => {
                 <div className = 'participants_pane-content'>
                     <Header>
                         <Close
-                            aria-label = { t('participants_pane.close', 'Close') }
                             onClick = { closePane }
                             onKeyPress = { closePaneKeyPress }
                             role = 'button'
