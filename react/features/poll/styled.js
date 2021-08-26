@@ -1,8 +1,6 @@
 
 import styled from 'styled-components';
 
-import { ActionTrigger } from './constants';
-
 export const ignoredChildClassName = 'ignore-child';
 
 
@@ -121,15 +119,6 @@ export const Header = styled.div`
   padding: 0 20px;
 `;
 
-export const PollsActions = styled.div`
-  align-items: center;
-  z-index: 1;
-
-  & > *:not(:last-child) {
-    margin-right: 8px;
-  }
-`;
-
 export const PollsContent = styled.div`
   align-items: center;
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.15);
@@ -160,12 +149,6 @@ export const PollsContainer = styled.div`
 
   ${props => !props.isHighlighted && '&:hover {'}
     background-color: #292929;
-
-    & ${PollsActions} {
-      ${props => props.trigger === ActionTrigger.Hover && `
-        display: flex;
-      `}
-    }
 
     & ${PollsContent} {
       box-shadow: none;

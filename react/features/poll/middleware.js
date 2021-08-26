@@ -32,7 +32,6 @@ MiddlewareRegistry.register(({ getState }) => next => action => {
         break;
     }
 
-
     }
 
     return result;

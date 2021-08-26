@@ -3,14 +3,14 @@ import _ from 'lodash';
 import { ReducerRegistry } from '../base/redux';
 
 import {
-    POLLS_PANE_CLOSE,
-    POLLS_PANE_OPEN,
+    DISABLE_CUSTOMIZED_ANSWER,
     NEW_POLL,
     NEW_POLL_RESPONSE,
     OPEN_POLL_CREATION_PAGE,
     OPEN_POLL_DETAIL_PAGE,
     OPEN_POLLSLIST_PAGE,
-    DISABLE_CUSTOMIZED_ANSWER,
+    POLLS_PANE_CLOSE,
+    POLLS_PANE_OPEN,
     SYNC_POLL
 } from './actionTypes';
 import { REDUCER_KEY } from './constants';
@@ -24,7 +24,6 @@ const DEFAULT_STATE = {
     addedCustomizedAnswer: {},
     optionsList: {}
 };
-
 
 ReducerRegistry.register(
     REDUCER_KEY, (state = DEFAULT_STATE, action) => {
