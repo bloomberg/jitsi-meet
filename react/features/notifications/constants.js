@@ -6,6 +6,11 @@
 export const NOTIFICATION_TIMEOUT = 2500;
 
 /**
+ * The standard time when poll notifications should disappear.
+ */
+export const POLL_NOTIFICATION_TIMEOUT = 10000;
+
+/**
  * The set of possible notification types.
  *
  * @enum {string}

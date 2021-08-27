@@ -17,3 +17,4 @@ import '../shared-video/reducer';
 import '../talk-while-muted/reducer';
 import '../virtual-background/reducer';
 import './reducers.any';
+import '../poll/reducer';

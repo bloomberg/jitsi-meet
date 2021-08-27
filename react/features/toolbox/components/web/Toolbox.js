@@ -38,6 +38,7 @@ import {
 } from '../../../participants-pane/actions';
 import ParticipantsPaneButton from '../../../participants-pane/components/ParticipantsPaneButton';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollButton } from '../../../poll';
 import { addReactionToBuffer } from '../../../reactions/actions.any';
 import { ReactionsMenuButton } from '../../../reactions/components';
 import { REACTIONS } from '../../../reactions/constants';
@@ -45,8 +46,7 @@ import {
     LiveStreamButton,
     RecordButton
 } from '../../../recording';
-import {
-    isScreenAudioSupported,
+import { isScreenAudioSupported,
     isScreenVideoShared,
     ShareAudioButton,
     startScreenShareFlow
@@ -80,6 +80,7 @@ import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
+
 
 import AudioSettingsButton from './AudioSettingsButton';
 import FullscreenButton from './FullscreenButton';
@@ -407,7 +408,7 @@ class Toolbox extends Component<Props> {
             <div
                 className = { rootClassNames }
                 id = 'new-toolbox'>
-                { this._renderToolboxContent() }
+                {this._renderToolboxContent()}
             </div>
         );
     }
@@ -678,6 +679,12 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
+        const poll = {
+            key: 'poll',
+            Content: PollButton,
+            group: 2
+        };
+
         const shareVideo = {
             key: 'sharedvideo',
             Content: SharedVideoButton,
@@ -764,6 +771,7 @@ class Toolbox extends Component<Props> {
             livestreaming,
             muteEveryone,
             muteVideoEveryone,
+            poll,
             shareVideo,
             shareAudio,
             etherpad,
@@ -985,11 +993,11 @@ class Toolbox extends Component<Props> {
      */
     _onShortcutToggleScreenshare() {
         sendAnalytics(createShortcutEvent(
-                'toggle.screen.sharing',
-                ACTION_SHORTCUT_TRIGGERED,
-                {
-                    enable: !this.props._screenSharing
-                }));
+            'toggle.screen.sharing',
+            ACTION_SHORTCUT_TRIGGERED,
+            {
+                enable: !this.props._screenSharing
+            }));
 
         this._doToggleScreenshare();
     }
@@ -1070,9 +1078,9 @@ class Toolbox extends Component<Props> {
     _onToolbarToggleFullScreen() {
         sendAnalytics(createToolbarEvent(
             'toggle.fullscreen',
-                {
-                    enable: !this.props._fullScreen
-                }));
+            {
+                enable: !this.props._fullScreen
+            }));
         this._closeOverflowMenuIfOpen();
         this._doToggleFullScreen();
     }
@@ -1224,6 +1232,7 @@ class Toolbox extends Component<Props> {
                                             </>
                                         ;
                                     })}
+
                                 </ul>
                             </OverflowMenuButton>
                         )}

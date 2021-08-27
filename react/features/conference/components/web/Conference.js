@@ -18,6 +18,7 @@ import { KnockingParticipantList, LobbyScreen } from '../../../lobby';
 import { getIsLobbyVisible } from '../../../lobby/functions';
 import { ParticipantsPane } from '../../../participants-pane/components/web';
 import { getParticipantsPaneOpen } from '../../../participants-pane/functions';
+import { PollPanel } from '../../../poll/components';
 import { Prejoin, isPrejoinPageVisible, isPrejoinPageLoading } from '../../../prejoin';
 import { fullScreenChanged, showToolbox } from '../../../toolbox/actions.web';
 import { Toolbox } from '../../../toolbox/components/web';
@@ -231,17 +232,17 @@ class Conference extends AbstractConference<Props, *> {
                     <div id = 'videospace'>
                         <LargeVideo />
                         {!_isParticipantsPaneVisible
-                         && <div id = 'notification-participant-list'>
-                             <KnockingParticipantList />
-                             <AudioModerationNotifications />
-                         </div>}
+                            && <div id = 'notification-participant-list'>
+                                <KnockingParticipantList />
+                                <AudioModerationNotifications />
+                            </div>}
                         <Filmstrip />
                     </div>
 
                     { _showPrejoin || _showLobby || <Toolbox /> }
                     <Chat />
 
-                    { this.renderNotificationsContainer() }
+                    {this.renderNotificationsContainer()}
 
                     <CalleeInfoContainer />
 
@@ -249,6 +250,7 @@ class Conference extends AbstractConference<Props, *> {
                     { _showLobby && <LobbyScreen />}
                 </div>
                 <ParticipantsPane />
+                <PollPanel />
             </div>
         );
     }
