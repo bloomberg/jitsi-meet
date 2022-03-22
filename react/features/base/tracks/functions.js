@@ -427,10 +427,24 @@ export function getTrackByMediaTypeAndParticipant(
     );
 }
 
+/**
+ * Returns track of given sourceName.
+ *
+ * @param {Track[]} tracks - List of all tracks.
+ * @param {string} sourceName - Source Name.
+ * @returns {(Track|undefined)}
+ */
 function getTrackBySourceName(tracks, sourceName) {
     return tracks.find(t => t?.jitsiTrack?.getSourceName() === sourceName);
 }
 
+/**
+ * Returns track of given fakeScreenshareParticipantId.
+ *
+ * @param {Track[]} tracks - List of all tracks.
+ * @param {string} fakeScreenshareParticipantId - Fake Screenshare Participant ID.
+ * @returns {(Track|undefined)}
+ */
 export function getFakeScreenshareParticipantTrack(tracks, fakeScreenshareParticipantId) {
     return getTrackBySourceName(tracks, fakeScreenshareParticipantId);
 }
