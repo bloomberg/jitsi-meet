@@ -167,7 +167,6 @@ function _setConfig(state, { config }) {
         });
     }
 
-
     const newState = _.merge(
         {},
         config,
