@@ -167,6 +167,8 @@ function _setConfig(state, { config }) {
         });
     }
 
+    config.flags = { sourceNameSignaling: true };
+    
     const newState = _.merge(
         {},
         config,

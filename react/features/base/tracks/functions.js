@@ -427,8 +427,12 @@ export function getTrackByMediaTypeAndParticipant(
     );
 }
 
-export function getTrackBySourceName(tracks, sourceName) {
+function getTrackBySourceName(tracks, sourceName) {
     return tracks.find(t => t?.jitsiTrack?.getSourceName() === sourceName);
+}
+
+export function getFakeScreenshareParticipantTrack(tracks, fakeScreenshareParticipantId) {
+    return getTrackBySourceName(tracks, fakeScreenshareParticipantId);
 }
 
 /**
