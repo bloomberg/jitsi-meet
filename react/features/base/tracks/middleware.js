@@ -8,10 +8,7 @@ import { shouldShowModeratedNotification } from '../../av-moderation/functions';
 import { hideNotification, isModerationNotificationDisplayed } from '../../notifications';
 import { isPrejoinPageVisible } from '../../prejoin/functions';
 import { getCurrentConference } from '../conference/functions';
-import {
-    getMultipleVideoSendingSupportFeatureFlag,
-    getMultipleVideoSupportFeatureFlag
-} from '../config';
+import { getMultipleVideoSendingSupportFeatureFlag } from '../config';
 import { getAvailableDevices } from '../devices/actions';
 import {
     CAMERA_FACING_MODE,
@@ -27,7 +24,6 @@ import {
     setScreenshareMuted,
     SCREENSHARE_MUTISM_AUTHORITY
 } from '../media';
-import { createFakeScreenShareParticipant, participantLeft } from '../participants';
 import { MiddlewareRegistry, StateListenerRegistry } from '../redux';
 
 import {
@@ -79,18 +75,7 @@ MiddlewareRegistry.register(store => next => action => {
             store.dispatch(getAvailableDevices());
         }
 
-        // Call next before the creation of a fake screenshare participant to ensure a video track is available when
-        // the participant is auto pinned.
-        const result = next(action);
-
-        if (getMultipleVideoSupportFeatureFlag(state)
-            && jitsiTrack.getVideoType() === VIDEO_TYPE.DESKTOP
-            && !jitsiTrack.isMuted()
-        ) {
-            store.dispatch(createFakeScreenShareParticipant(jitsiTrack));
-        }
-
-        return result;
+        break;
     }
     case TRACK_NO_DATA_FROM_SOURCE: {
         const result = next(action);
@@ -101,15 +86,6 @@ MiddlewareRegistry.register(store => next => action => {
     }
 
     case TRACK_REMOVED: {
-        const state = store.getState();
-
-        if (getMultipleVideoSupportFeatureFlag(state) && action.track.jitsiTrack.videoType === VIDEO_TYPE.DESKTOP) {
-            const conference = getCurrentConference(state);
-            const participantId = action.track.jitsiTrack.getSourceName();
-
-            store.dispatch(participantLeft(participantId, conference));
-        }
-
         _removeNoDataFromSourceNotification(store, action.track);
         break;
     }
