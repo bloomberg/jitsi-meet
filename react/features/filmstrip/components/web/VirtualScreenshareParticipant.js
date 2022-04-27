@@ -68,7 +68,7 @@ type Props = {
     onTouchStart: Function,
 
     /**
-     * The ID of the fake screen share participant.
+     * The ID of the virtual screen share participant.
      */
     participantId: string,
 
@@ -83,7 +83,7 @@ type Props = {
     videoTrack: Object
 }
 
-const FakeScreenShareParticipant = ({
+const VirtualScreenshareParticipant = ({
     classes,
     containerClassName,
     isHovered,
@@ -135,8 +135,8 @@ const FakeScreenShareParticipant = ({
                 ) }>
                 <ThumbnailTopIndicators
                     currentLayout = { currentLayout }
-                    isFakeScreenShareParticipant = { true }
                     isHovered = { isHovered }
+                    isVirtualScreenshareParticipant = { true }
                     participantId = { participantId } />
             </div>
             <div
@@ -154,4 +154,4 @@ const FakeScreenShareParticipant = ({
         </span>);
 };
 
-export default FakeScreenShareParticipant;
+export default VirtualScreenshareParticipant;
